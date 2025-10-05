@@ -63,3 +63,11 @@ Promise.all([promise, promise2,promise3, promise4])
        console.log(results[1])
        console.log(results[2])
  })
+
+
+//  fetching from one Api
+fetch('https://jsonplaceholder.typicode.com/users')  //fetch the API url return a promise
+.then(response => response.json())                   //convert out reponse to json
+// .then(console.log(result))                           //Not desirable it'll direct print the result because we are calling it like a function , should pass it like a callback.
+.then(result => console.log(result))
+.catch(error => console.error("Error here !", error))  //catch the error  
