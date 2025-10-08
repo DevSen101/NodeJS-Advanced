@@ -47,7 +47,10 @@ Promise.all([promise, promise2,promise3, promise4])
 .then(values => console.log(values)) 
 // Give result when all promise resolved or rejected
 
-// --------Real World Example--------------
+
+
+// --------Real World Example------------
+
 
  const urls = [
        'https://jsonplaceholder.typicode.com/users',
@@ -58,7 +61,8 @@ Promise.all([promise, promise2,promise3, promise4])
  Promise.all(urls.map(url => {
        return fetch(url)
        .then(res => res.json())
- })).then(results => {
+ }))
+ .then(results => {
        console.log(results[0])
        console.log(results[1])
        console.log(results[2])

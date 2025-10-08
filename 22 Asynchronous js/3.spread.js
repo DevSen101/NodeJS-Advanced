@@ -17,9 +17,11 @@ function objectSpread(p1,p2,p3){
 
 }
 
+
 // const { tiger, lion, ...rest } = animals;
 
 objectSpread(tiger, lion, rest)
+
 
 // -----------------
 const arr = [1,2,3,4,5,6]
