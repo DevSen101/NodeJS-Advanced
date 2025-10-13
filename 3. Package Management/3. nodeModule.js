@@ -1,0 +1,47 @@
+// **Node Modules Folder – Notes**
+
+// * The `node_modules` folder stores all the packages installed from npm.
+// * It is located in the project root, beside `package.json`.
+// * When you run `npm install`, npm downloads packages from its registry and saves them in `node_modules`.
+// * Node automatically looks for dependencies in `node_modules` when using `require()`.
+
+// **Dependencies and Sub-dependencies**
+
+// * Sometimes you install one package (e.g., Axios), but it also depends on other packages (e.g., `follow-redirects`).
+// * npm installs both your direct dependencies and their dependencies.
+// * This forms a **dependency tree**.
+
+// **Managing Node Modules**
+
+// * Each folder inside `node_modules` contains the full source code for that package.
+// * You should **never modify** files inside `node_modules`.
+// * Everything inside should be managed by npm and your `package.json`.
+
+// **Flat Folder Structure**
+
+// * npm installs all dependencies in a flat structure (side by side) to avoid duplication.
+// * This prevents having multiple copies of the same package.
+
+// **Node Modules Size**
+
+// * `node_modules` can become large.
+// * Earlier versions of npm caused duplication problems, but now npm handles this efficiently.
+
+// **Regenerating Node Modules**
+
+// * You usually don’t share the `node_modules` folder.
+// * Other developers can recreate it by running `npm install`.
+// * Deleting `node_modules` and reinstalling fixes most issues.
+
+// **Git Ignore**
+
+// * The `.gitignore` file excludes `node_modules` from version control.
+// * Example from the Axios GitHub repo: `node_modules/` is listed in `.gitignore` to save space.
+
+// **Summary**
+
+// * `node_modules` stores all dependencies required by your project.
+// * It includes all sub-dependencies in a flat structure.
+// * Managed entirely by npm using `package.json`.
+// * Always regenerate with `npm install`.
+// * Never push it to GitHub — use `.gitignore`.

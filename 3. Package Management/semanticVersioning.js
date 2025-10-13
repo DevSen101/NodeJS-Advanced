@@ -1,0 +1,40 @@
+// **Semantic Versioning – Notes**
+
+// * Packages use **semantic versioning (SemVer)** format:
+//   **major.minor.patch** (e.g., `2.4.1`)
+
+// **1. Major Version**
+
+// * First number.
+// * Increases when there are **breaking changes** in functionality.
+// * Example: a new version that’s incompatible with previous ones.
+
+// **2. Minor Version**
+
+// * Middle number.
+// * Increases when **new features** are added without breaking existing functionality.
+// * Example: new options or methods added, but all old ones still work.
+
+// **3. Patch Version**
+
+// * Last number.
+// * Used for **small bug fixes or minor improvements**.
+// * Does not add new features or break anything.
+
+// **Why It Matters**
+
+// * `package.json` uses semantic versioning to manage dependencies.
+// * Example: `"axios": "^1.3.0"` — means install version 1.3.x but not 2.0.0.
+// * Ensures compatibility and stability between updates.
+
+// **Caution**
+
+// * Following semantic versioning is **optional**, not enforced.
+// * Some package authors may not strictly follow it.
+// * Safer to use **well-known, popular packages** since they are more reliable and consistent.
+
+// **Summary**
+
+// * `major.minor.patch` = breaking changes / new features / bug fixes.
+// * Helps manage updates safely.
+// * Prefer trusted packages that properly follow this convention.
