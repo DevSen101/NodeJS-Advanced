@@ -1,6 +1,6 @@
 // const http = require('https')   //require the http module.
 
-// const { request } = require('https')  // more advanced js now we dont need to html.request .  
+// const { request } = require('https')  // more advanced js now we dont need to html.request . because we directly requiring  request function that i want from https module
 
 const { get } = require('https')         //http and https provides us Get function same as request. but in this we dont need to call req.end().
 
