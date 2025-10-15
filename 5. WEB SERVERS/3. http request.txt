@@ -1,0 +1,96 @@
+/*
+============================================================
+Node.js – Understanding HTTP Requests and API Communication
+============================================================
+
+### Introduction
+- HTTP (Hypertext Transfer Protocol) defines how clients (like browsers) and servers communicate.
+- APIs (Application Programming Interfaces) define *what* operations can be performed and *how* to use them.
+- Browsers usually make the requests, and servers respond with the requested data.
+
+------------------------------------------------------------
+### What is an API?
+------------------------------------------------------------
+- API = Application Programming Interface.
+- Defines how two applications talk to each other.
+- Example: Browser ↔ Web Server.
+- Think of an API like a set of language phrases that allow communication between systems.
+
+------------------------------------------------------------
+### Browser–Server Communication
+------------------------------------------------------------
+- The browser usually starts the conversation.
+- It sends an HTTP **request** to the server.
+- The server **responds** with the required data.
+- The browser can then make additional requests based on the response.
+- It’s like the browser interviewing the server with questions.
+
+------------------------------------------------------------
+### HTTP Methods and Resources
+------------------------------------------------------------
+- An API is built using HTTP methods (verbs) and data collections.
+
+Common combinations:
+- **GET /friends** → Get list of all friends.
+- **GET /friends/5** → Get data about the friend with ID = 5.
+- **POST /messages** → Send or create a new message.
+- **PUT /messages/7** → Update message with ID = 7.
+- **DELETE /friends/3** → Remove friend with ID = 3.
+
+Concepts:
+- Requests are made on **collections** (like /friends, /messages).
+- Or on **specific items** (like /friends/5, /messages/7).
+- POST adds new data to a collection.
+- PUT updates an existing item.
+- DELETE removes an item.
+- GET retrieves data.
+
+------------------------------------------------------------
+### Structure of an HTTP Request
+------------------------------------------------------------
+Every HTTP request has **four main parts**:
+
+1. **Method**
+   - Defines the action to perform (GET, POST, PUT, DELETE, etc.).
+   - Example: `GET` means “fetch data”.
+
+2. **Path (or Resource)**
+   - Identifies what data or resource the request is targeting.
+   - Example: `/messages/5` → message with ID 5.
+
+3. **Body**
+   - Contains the actual data being sent (only for POST or PUT).
+   - Sent in various formats — most commonly **JSON**.
+   - Example body (JSON):
+     ```json
+     {
+       "message": "Hello World!",
+       "photo": "/uploads/photo1.jpg"
+     }
+     ```
+   - Typically used in:
+     - POST requests (create new data)
+     - PUT requests (update data)
+   - Not used in:
+     - GET requests (read only)
+     - DELETE requests (no data to send)
+
+4. **Headers**
+   - Extra information (metadata) about the request.
+   - Example: data type, size, authentication tokens, etc.
+   - Headers describe **data about the data**.
+   - Common header uses:
+     - Authentication info
+     - Content type
+     - Request size
+   - **One mandatory header:** `Host`
+     - Specifies the server address (and port number, if needed).
+     - Ensures the request reaches the correct destination.
+
+------------------------------------------------------------
+### Example HTTP Request (Simplified)
+------------------------------------------------------------
+```
+POST /messages HTTP/1.1
+Host: example.com
+Content

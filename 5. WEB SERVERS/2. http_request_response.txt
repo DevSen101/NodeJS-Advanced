@@ -1,0 +1,45 @@
+/*
+============================================================
+Node.js – Understanding APIs and HTTP Methods
+============================================================
+
+### Introduction
+- When we browse to a website, the system uses DNS to find where that site lives.
+- DNS gives the IP address of the server so the browser can communicate with it.
+- We make requests to the HTTP web server to get data back.
+
+------------------------------------------------------------
+### What Defines the Server's Behavior?
+------------------------------------------------------------
+- The thing that defines how a web server responds to requests is called the **API**.
+- The **API (Application Programming Interface)** tells:
+  - What functions the server should support.
+  - How those functions should be used.
+
+Examples:
+- Get a list of friends.
+- Get messages or photos.
+- Post or upload a new photo.
+- Delete user data.
+
+------------------------------------------------------------
+### APIs and Programming Languages
+------------------------------------------------------------
+- APIs can be implemented in any language (Node.js, Python, Java, etc.).
+- The key point is that communication happens using **HTTP**.
+- HTTP is the shared "language" between browsers and servers.
+- The browser speaks HTTP to send requests.
+- The server speaks HTTP to send responses.
+
+------------------------------------------------------------
+### The HTTP Language
+------------------------------------------------------------
+- HTTP defines a set of **request methods**, also called **HTTP verbs**.
+- These verbs describe what action the client wants the server to perform.
+
+Common HTTP Methods:
+1. **GET** – Retrieve data from the server.
+2. **POST** – Send or submit data to the server (e.g., form submission, file upload).
+3. **DELETE** – Remove existing data on the server.
+4. **PUT** – Replace existing data with new data.
+5. **PATC**

@@ -1,0 +1,90 @@
+## Node.js – Building Web Servers (HTTP Section)
+
+### Introduction
+- Node.js can be used to create many types of programs — from parsing files and analyzing data to making games.  
+- Most often, Node is used to bring programs to the web by building **backends** for websites and mobile apps.  
+- These backends share data such as observations, game results, or any kind of information.  
+- In this section, we learn to build web servers using Node.js.
+
+---
+
+### What is a Backend?
+- A **backend** refers to the server-side part of an application.  
+- It handles requests from clients (like browsers or mobile apps) and sends back responses.  
+- Examples include:
+  - Web servers (for websites)
+  - FTP servers (for file transfers)
+  - Mail servers (for emails)
+
+---
+
+### How the Internet Works (Step-by-Step)
+1. When we type a website like **facebook.com** in a browser,  
+   the browser uses **DNS (Domain Name System)** to find its IP address.  
+2. DNS servers look up the IP address of the given domain name (URL).  
+3. This is similar to using Google Maps:  
+   - You give the name (like “Empire State Building”)  
+   - It returns the actual address (like “West 34th Street”).  
+4. On the internet, the address is an **IP Address** (Internet Protocol Address).  
+   - Example format: `192.168.1.1`  
+   - Four numbers separated by dots, each between 0–255.  
+
+---
+
+### DNS and IP Address
+- DNS servers return the IP address of the site you typed.  
+- Your computer then communicates with the web server at that IP address.  
+- The DNS lookup only happens the first time — later, your computer stores it in the **DNS cache** for faster access.  
+
+---
+
+### HTTP and HTTPS
+- The browser communicates with the web server using **HTTP** (Hypertext Transfer Protocol).  
+- The secure version is **HTTPS**, which encrypts communication so no one can read or steal the data in between.  
+
+---
+
+### Ports and Protocols
+- Servers can run multiple applications using different **protocols** and **ports**.  
+- A **port number** tells which application should handle the request.  
+- Example:
+  - Port 80 → HTTP server  
+  - Port 443 → HTTPS server  
+  - Port 21 → FTP server  
+- Ports are written after a colon in the address, e.g. `192.168.1.1:80`.
+
+---
+
+### Web Server Response
+- A web server sends back data such as:
+  - JSON files
+  - Text
+  - Images
+  - Videos  
+- For dynamic sites like Facebook, data constantly changes and is updated in real time.
+
+---
+
+### DNS Cache
+- After the first DNS lookup, browsers store the result locally.  
+- This is called **DNS caching**.  
+- It reduces future lookups, improving speed and performance.
+
+---
+
+### Summary
+- Node.js can be used to create HTTP servers that handle client requests and send back responses.  
+- We’ll use Node to:
+  - Understand HTTP communication
+  - Handle requests and responses
+  - Build real working backend servers  
+
+---
+
+### Key Concepts Recap
+- **Backend:** Server-side of an app.  
+- **DNS:** Translates domain names into IP addresses.  
+- **IP Address:** Unique address of a device on the internet.  
+- **HTTP/HTTPS:** Protocols for web communication.  
+- **Port:** Identifies which service on a server should handle the request.  
+- **DNS Cache:** Speeds up browsing by saving past DNS lookups.

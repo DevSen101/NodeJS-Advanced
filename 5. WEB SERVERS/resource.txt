@@ -1,0 +1,6 @@
+/**
+ * HTTP documentation - https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Methods
+ * API - https://www.mulesoft.com/api/what-is-an-api
+ * HTTP RESPONSE STATUS CODE - https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status
+ * 
+ */

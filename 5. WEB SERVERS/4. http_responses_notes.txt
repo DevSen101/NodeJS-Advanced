@@ -1,0 +1,94 @@
+/*
+HTTP RESPONSES THEORY
+
+We've seen how the browser sends messages (requests) to the server, passing:
+- A method (GET, POST, etc.)
+- A path to a resource or collection
+- Sometimes a body (data to send)
+- Optional headers (metadata)
+
+Now, what does the server respond with?
+
+RESPONSES IN HTTP:
+Responses are even simpler than requests. They have 3 main parts:
+
+1. HEADERS:
+   - Optional properties with metadata.
+   - Example: Content-Type → tells the type of data being sent (JSON, HTML, etc.)
+   - Headers can appear in both requests and responses.
+
+2. BODY:
+   - Contains the data fetched from the server.
+   - If Content-Type = application/json, then the server sends JSON data (like a message object).
+   - Example body: { "message": "Hi" }
+   - Usually appears in GET or POST responses.
+
+3. STATUS CODE:
+   - Indicates whether the request was successful or not.
+   - Example: 200 (OK), 404 (Not Found), 500 (Server Error)
+   - Helps diagnose what happened in the client-server communication.
+
+====================================================
+HTTP STATUS CODE SERIES:
+====================================================
+
+1️⃣ 100 SERIES → INFORMATIONAL
+- Used internally by browsers/libraries.
+- Example: 100 Continue → large request is being sent, all okay so far.
+
+2️⃣ 200 SERIES → SUCCESS
+- 200 OK → Request succeeded, response available.
+- 201 Created → Resource successfully created (common for POST).
+- 204 No Content → Successful request but no data to return.
+
+3️⃣ 300 SERIES → REDIRECTION
+- 301 Moved Permanently → Resource moved to another URL.
+- 302 Found → Temporary redirect.
+- 304 Not Modified → Cached response can be used.
+
+4️⃣ 400 SERIES → CLIENT ERRORS
+- 400 Bad Request → Invalid syntax or data from client.
+- 401 Unauthorized → Not authenticated (not logged in).
+- 403 Forbidden → Authenticated but no permission to access.
+- 404 Not Found → Resource or endpoint doesn’t exist.
+- 405 Method Not Allowed → Resource exists but HTTP method not supported.
+- 408 Request Timeout → Request took too long.
+- 418 I’m a teapot → Joke status (from April Fool’s, RFC 2324).
+
+5️⃣ 500 SERIES → SERVER ERRORS
+- 500 Internal Server Error → Server crashed or unexpected error.
+- 501 Not Implemented → Feature not available yet.
+- 503 Service Unavailable → Temporary overload or maintenance.
+- 504 Gateway Timeout → Server acting as a gateway did not receive a response.
+
+====================================================
+REAL-WORLD INSPECTION (DEVELOPER TOOLS):
+====================================================
+
+Example:
+- Browser makes a GET request to: https://developer.mozilla.org
+- Response: 200 OK
+- Server: IP + Port
+- Response Headers: Content-Type: text/html
+- Request Headers: include cookies, user-agent, etc.
+- Response Body: HTML or JSON data.
+
+To view:
+1. Open Developer Tools → Network Tab
+2. Reload the page
+3. Inspect each request
+4. View Headers, Status, and Response Body
+
+====================================================
+SUMMARY:
+====================================================
+
+- Requests: method, path, body (optional), headers (optional)
+- Responses: status code, headers (optional), body (optional)
+- Status codes grouped by their starting digit (1xx–5xx)
+- Headers give metadata like content type, authentication, etc.
+- Bodies carry the actual data (HTML, JSON, etc.)
+
+Understanding HTTP responses is essential for both frontend and backend development.
+It helps debug APIs, build servers, and handle errors effectively.
+*/
