@@ -1,34 +1,53 @@
 // Import the Express framework
-const express = require('express')
+const express = require('express');
 
 // Create an Express application instance
-const app = express()
+const app = express();
 
-// Define the port number the server will listen on
+// Define the port number where the server will listen
 const PORT = 3000;
 
-// Define a route for the root URL ("/")
+// Define a mock array of friends data
+const friends = [
+  { id: 0, name: 'Bhagat Singh' },
+  { id: 1, name: 'Rajguru' },
+  { id: 2, name: 'Sukhdev' },
+  { id: 3, name: 'Swami Vivekananda' }
+];
+
+// Root route: responds with plain text
 app.get('/', (req, res) => {
-  res.send('Hello') // Send plain text as the response
-})
+  res.send('Hello'); // Sends simple text response
+});
 
-// Define a route for "/friends"
+// /friends route: responds with all friends as JSON
 app.get('/friends', (req, res) => {
-  res.send({ id: 1, name: 'Swami Vivekananda' }) // Send JSON data as response
-})
+  res.json(friends); // Converts JS object to JSON and sends it
+});
 
-// Define a route for "/messages" (GET request)
+// /friends/:friendsID route: responds with specific friend by ID
+app.get('/friends/:friendsID', (req, res) => {
+  const friendsID = Number(req.params.friendsID); // Convert route param to number
+  const friend = friends[friendsID]; // Get the friend with matching index
+  if (friend) {
+    res.status(200).json(friend); // If found, send friend data with 200 OK
+  } else {
+    res.status(404).json({ error: 'Friend does not exist' }); // If not found, send 404
+  }
+});
+
+// /messages route (GET): responds with simple HTML
 app.get('/messages', (req, res) => {
-  res.send('<ul><li>Hello dear!</li><li>Coders here!</li></ul>') // Send simple HTML as response
-})
+  res.send('<ul><li>Hello dear!</li><li>Coders here!</li></ul>');
+});
 
-// Define a route for "/messages" (POST request)
+// /messages route (POST): logs request and responds with confirmation
 app.post('/messages', (req, res) => {
-  console.log('updating the messages'); // Print message in terminal when a POST request is made
-  res.send('Message received'); // Send back a confirmation response
-})
+  console.log('Updating the messages'); // Logs to terminal
+  res.send('Message received'); // Sends back confirmation
+});
 
-// Start the server and listen on the defined port
+// Start the server
 app.listen(PORT, () => {
   console.log(`Listening on ${PORT}...`);
-})
+});
