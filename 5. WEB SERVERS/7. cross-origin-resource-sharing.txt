@@ -1,0 +1,48 @@
+CORS (Cross-Origin Resource Sharing) - Simple Notes
+
+1. Meaning:
+CORS stands for Cross-Origin Resource Sharing; it relaxes restrictions of the Same Origin Policy (SOP) to allow safe cross-origin requests.
+
+2. Why CORS:
+SOP limits browser requests to one origin; CORS allows apps to span multiple domains and origins safely.
+
+3. Example - Wikipedia:
+- Wikipedia loads article data from its own domain.
+- Media like diagrams/photos may come from Wikimedia.org (different origin).
+- CORS headers allow these cross-origin requests.
+
+4. Access-Control-Allow-Origin Header:
+- Set by the server on responses.
+- Specifies which origins are allowed to access resources.
+- Example: '*' allows all origins; a specific domain allows only that domain.
+
+5. Default SOP Behavior:
+- Without this header, only the same origin can access resources.
+- Other domains are blocked.
+
+6. Server Control:
+- Only the server owning the data can set CORS headers.
+- Values can be a specific origin or '*'.
+
+7. Best Practices:
+- In production, whitelist known domains rather than allowing all.
+- Example: An online store may only allow requests from payment provider domain.
+- This is called whitelisting (allowing pre-approved origins).
+
+8. Whitelisting vs Blacklisting:
+- Whitelisting: deny by default, allow specific origins (more secure).
+- Blacklisting: allow by default, block specific origins (less secure, easy to miss).
+
+9. Public Data:
+- Wikimedia allows all origins because data is public and safe to share.
+- Access-Control-Allow-Origin: '*' is common for public APIs.
+
+10. Browser Enforcement:
+- CORS enforcement is done by the browser.
+- Servers set headers; browsers enforce them.
+- If a browser ignores headers, enforcement fails; users must use trusted browsers.
+
+11. Summary:
+CORS enables safe cross-origin requests, supplements SOP, uses headers like Access-Control-Allow-Origin, and follows secure whitelisting practices.
+
+End of Notes

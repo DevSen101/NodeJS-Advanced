@@ -1,0 +1,42 @@
+Same Origin Policy - Simple Notes
+
+1. Meaning:
+The Same Origin Policy (SOP) is a browser security feature that limits how web pages from one origin can interact with resources from another origin.
+
+2. What is an Origin:
+An origin is made up of three parts:
+- Protocol (http or https)
+- Host (domain name, like google.com)
+- Port (example: 80 for http, 443 for https)
+
+3. When Origin Changes:
+If any one of these three parts changes (protocol, host, or port), it becomes a different origin.
+Example:
+- https://www.google.com/maps and https://www.google.com/mail → same origin
+- http://www.google.com and https://www.google.com → different origin
+- https://google.com and https://facebook.com → different origin
+
+4. Why SOP Exists:
+SOP is used to protect users from malicious websites trying to access or steal data from other sites.
+
+5. How SOP Works:
+Your browser only allows scripts from the same origin to make requests to the same origin server.
+Requests from one origin (like google.com) to another (like facebook.com) are blocked by default.
+
+6. Exception - Form Submission:
+Some cross-origin actions like submitting a form (POST request) are allowed because the target server decides how to handle them.
+
+7. Example:
+If you’re on google.com, you can click a link to go to wikipedia.org (browser navigation allowed),
+but JavaScript on google.com cannot fetch data directly from wikipedia.org (blocked by SOP).
+
+8. Cross-Origin Requests:
+When JavaScript tries to fetch data from another origin, the browser blocks it and shows an error like:
+“Access to fetch has been blocked by CORS policy: No Access-Control-Allow-Origin header present.”
+
+9. What is CORS:
+CORS (Cross-Origin Resource Sharing) is a mechanism that allows a server to specify which origins are allowed to access its resources safely.
+
+10. Main Idea:
+The Same Origin Policy protects users by preventing malicious sites from accessing private data on other sites,
+while still allowing safe actions like navigation and server-controlled communication.
