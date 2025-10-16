@@ -1,51 +1,63 @@
-// Import Node.js HTTP module
-const http = require('http');
+const http = require('http'); // Import built-in HTTP module to create a web server
 
-// Define port number for server
-const PORT = 3000;
+const PORT = 3000; // Define the port number where the server will run
 
-// Create server instance
-const server = http.createServer();
+const server = http.createServer(); // Create an HTTP server instance
 
-// Listen for incoming requests
+// Mock data representing a list of friends
+const friends = [
+  { id: '0', name: 'Nikola Tesla' },
+  { id: '1', name: 'Sir Isaac Newton' },
+  { id: '2', name: 'Albert Einstein' },
+  { id: '3', name: 'Thomas Alva Edison' }
+];
+
+// Register an event listener for incoming HTTP requests
 server.on('request', (req, res) => {
+  const items = req.url.split('/'); // Split the request URL into parts (e.g., /friends/2)
 
-  // Route: /friends
-  if (req.url === '/friends') {
-    res.statusCode = 200; // Success status
-    res.setHeader('Content-Type', 'application/json'); // Response type: JSON
-
-    // Send JSON response
-    res.end(JSON.stringify({
-      id: '1',
-      name: 'Dev Sen'
-    }));
+  // -------------------- POST /friends --------------------
+  if (req.method === 'POST' && items[1] === 'friends') {
+    req.on('data', (data) => { // Listen for incoming request body data
+      const friend = data.toString(); // Convert binary buffer to string
+      console.log('Request : ', friend); // Log received data
+      friends.push(JSON.parse(friend)); // Parse JSON string and add new friend to the array
+    });
+    req.pipe(res); // Send back the same data as a response
   }
 
-  // Route: /messages
-  else if (req.url === '/messages') {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/html'); // Response type: HTML
+  // -------------------- GET /friends or /friends/:id --------------------
+  else if (req.method === 'GET' && items[1] === 'friends') {
+    res.statusCode = 200; // Set HTTP status to OK (200)
+    res.setHeader('Content-Type', 'application/json'); // Specify JSON response format
 
-    // Send simple HTML response
-    res.write('<html>');
-    res.write('<body>');
-    res.write('<ul>');
-    res.write('<li>Hii There</li>');
-    res.write('<li>Dev here, how’s you?</li>');
-    res.write('</ul>');
-    res.write('</body>');
-    res.write('</html>');
-    res.end();
+    if (items.length === 3) { // If URL is /friends/:id (e.g., /friends/2)
+      const friendIndex = Number(items[2]); // Convert ID to number
+      res.end(JSON.stringify(friends[friendIndex])); // Respond with that specific friend's data
+    } else {
+      res.end(JSON.stringify(friends)); // Otherwise, respond with the full list
+    }
   }
-  // For any other route
+
+  // -------------------- GET /messages --------------------
+  else if (req.method === 'GET' && items[1] === 'messages') {
+    res.statusCode = 200; // OK status
+    res.setHeader('Content-Type', 'text/html'); // Specify HTML response format
+    res.write('<html><body><ul>'); // Begin HTML content
+    res.write('<li>Hii There</li>'); // First message
+    res.write('<li>Dev here, how’s you?</li>'); // Second message
+    res.write('</ul></body></html>'); // End HTML content
+    res.end(); // End the response
+  }
+
+  // -------------------- Unknown Routes --------------------
   else {
-    res.statusCode = 404; // Not Found
-    res.end('404 Not Found');
+    res.statusCode = 404; // Not found
+    res.end('404 Not Found'); // Return an error message
   }
 });
 
-// Start server and listen on defined port
+// Start the server and listen on the defined port
 server.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}...`);
 });
