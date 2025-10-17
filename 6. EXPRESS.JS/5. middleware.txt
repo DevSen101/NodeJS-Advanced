@@ -1,0 +1,72 @@
+Express Middleware Notes
+
+Middleware are special functions that run between the incoming request and the outgoing response in Express.
+They allow you to add features like logging, validation, authentication, etc.
+
+An Express app is basically a chain of middleware functions that execute in order.
+When a request enters, it flows through all middleware one by one until the response is sent.
+
+Middleware are registered using app.use().
+
+Example:
+app.use((req, res, next) => {
+  // Do something
+  next(); // pass control to the next middleware
+});
+
+Each middleware has three parameters:
+1. req → request object
+2. res → response object
+3. next → function that passes control to the next middleware
+
+The next() function is very important. If next() is not called, the request stops and no further middleware runs.
+
+Flow example:
+- Middleware 1: logs request
+- Middleware 2: validates input
+- Middleware 3: final route handler sends response
+
+Example flow:
+app.use((req, res, next) => {
+  console.log('Logging...');
+  next();
+});
+
+app.use((req, res, next) => {
+  console.log('Validating...');
+  next();
+});
+
+app.get('/home', (req, res) => {
+  res.send('Response sent');
+});
+
+When a request comes in, it passes through the first middleware, then the second, and finally reaches the route handler.
+
+Once the route handler sends a response, it goes back up through the middleware chain until the client receives it.
+
+Middleware can do tasks such as:
+- Logging each request
+- Validating data
+- Checking authentication
+- Parsing JSON or form data
+- Handling errors
+
+The order of middleware is important. They execute in the order they are registered.
+
+Endpoints like app.get() or app.post() are also middleware, but they usually do not call next().
+They end the request-response cycle by sending the final output.
+
+Request → Middleware 1 → Middleware 2 → Route Handler → Response
+
+Think of middleware like layers of an onion:
+Each layer processes the request on the way in and the response on the way out.
+
+Summary:
+1. Middleware run between request and response.
+2. Each middleware can modify req or res.
+3. next() controls execution order.
+4. Last handler sends the response.
+5. Middleware order matters.
+6. Express apps are built as a series of middleware layers.
+

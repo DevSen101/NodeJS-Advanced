@@ -1,0 +1,46 @@
+Model View Controller (MVC) - Notes
+
+1. MVC is a design pattern used to organize code in Express and other frameworks.
+   It helps make code easy to manage, understand, and scale.
+
+2. MVC splits an application into three parts:
+   - Model
+   - View
+   - Controller
+
+3. Model:
+   - Represents data and how the app interacts with it.
+   - Handles database logic (e.g., fetching, saving, updating).
+   - In Express, it can be an array or database (like MongoDB or SQL).
+
+4. View:
+   - Controls how data is presented to the user.
+   - Can be HTML pages, charts, or API responses (like JSON data).
+   - Updates when the model changes.
+
+5. Controller:
+   - Handles user requests and responses.
+   - Processes inputs, updates the model, and decides what to show via the view.
+   - In Express, these are usually route handler functions.
+
+6. Flow of MVC:
+   - User interacts with Controller (via request).
+   - Controller updates Model.
+   - Model changes trigger View update.
+   - View shows updated data to User.
+
+7. Benefits of MVC:
+   - Easier to read and maintain code.
+   - Each part has a clear responsibility.
+   - Makes debugging and scaling simpler.
+
+8. Related patterns:
+   - MVP (Model View Presenter)
+   - MVVM (Model View ViewModel)
+   These are just variations of MVC used in other languages like Java or C#.
+
+9. In Node.js with Express:
+   - MVC is the most common and recommended architecture.
+
+Summary:
+MVC separates data (Model), logic (Controller), and UI (View) to make web apps structured, readable, and scalable.

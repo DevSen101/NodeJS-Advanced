@@ -1,0 +1,25 @@
+Nodemon and Development Dependencies Notes:
+
+1. Restarting the server manually after every change is tiresome.
+
+2. Nodemon:
+   - Tool to automatically restart the server when JavaScript files change.
+   - Install with npm: `npm install nodemon --save-dev`
+   - `--save-dev` flag adds Nodemon to the devDependencies section in package.json.
+
+3. DevDependencies:
+   - Only needed during development.
+   - Not required to run the project in production.
+   - Examples: Nodemon, testing tools, build tools.
+   - Helps keep the project lightweight for production and open-source sharing.
+   - Keeps node_modules organized and prevents unnecessary growth.
+
+4. Usage:
+   - Add a script in package.json, e.g., `"watch": "nodemon server.js"`.
+   - Run with `npm run watch`.
+   - Server automatically restarts on file changes, e.g., changing a friend's name.
+
+5. Summary:
+   - Nodemon improves development workflow.
+   - DevDependencies separate development-only tools from production dependencies.
+   - Keeps node_modules tidy and project easier to manage.
