@@ -1,6 +1,6 @@
 const express = require('express'); // Import Express
-const friendController = require('./controllers/friends.controller')
-const messageController = require('./controllers/messages.controller')
+const messagesRouter = require('./routes/messages.router')
+const friendRouter = require('./routes/friends.router')
 
 const app = express(); // Create Express app
 
@@ -13,20 +13,14 @@ app.get('/', (req, res) => {
 app.use((req, res, next) => {
   const start = Date.now(); 
   next(); // Move to next middleware/route
-  console.log(`${req.method} ${req.url} ${Date.now() - start}ms`); // Log request info
+  console.log(`${req.method} ${req.baseUrl} ${req.url} ${Date.now() - start}ms`); // Log request info
 });
 
 app.use(express.json())
 
-app.post('/friends', friendController.postFriend)
+app.use('/friends', friendRouter)
+app.use('/messages', messagesRouter)
 
-app.get('/friends', friendController.getFriends);
-
-app.get('/friends/:friendsID', friendController.getFriend);
-
-app.get('/messages', messageController.getmessages);
-
-app.post('/messages', messageController.postMessage);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`); // Start server

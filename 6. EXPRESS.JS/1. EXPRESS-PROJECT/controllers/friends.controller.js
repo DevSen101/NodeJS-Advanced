@@ -1,6 +1,5 @@
 const model = require('../models/friends.model')
 
-
 function getFriends(req, res){
   res.json(model); // Send all friends as JSON
 }
