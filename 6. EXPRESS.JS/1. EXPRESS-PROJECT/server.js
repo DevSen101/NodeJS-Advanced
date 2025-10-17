@@ -1,60 +1,33 @@
-// Import the Express framework
-const express = require('express');
+const express = require('express'); // Import Express
+const friendController = require('./controllers/friends.controller')
+const messageController = require('./controllers/messages.controller')
 
-// Create an Express application instance
-const app = express();
+const app = express(); // Create Express app
 
-// Define the port number where the server will listen
-const PORT = 3000;
+const PORT = 3000; // Port number
 
-// Define a mock array of friends data
-const friends = [
-  { id: 0, name: 'Bhagat Singh' },
-  { id: 1, name: 'Rajguru ji' },
-  { id: 2, name: 'Sukhdev ji' },
-  { id: 3, name: 'Swami Vivekananda' }
-];
-
-// Root route: responds with plain text
 app.get('/', (req, res) => {
-  res.send('Hello'); // Sends simple text response
+  res.send('Hello'); // Root route: send plain text
 });
 
 app.use((req, res, next) => {
-  const start = Date.now()
-  next();
-  const delta = Date.now() - start
-  console.log(`${req.method} ${req.url} ${delta}ms `);
-})
-
-// /friends route: responds with all friends as JSON
-app.get('/friends', (req, res) => {
-  res.json(friends); // Converts JS object to JSON and sends it
+  const start = Date.now(); 
+  next(); // Move to next middleware/route
+  console.log(`${req.method} ${req.url} ${Date.now() - start}ms`); // Log request info
 });
 
-// /friends/:friendsID route: responds with specific friend by ID
-app.get('/friends/:friendsID', (req, res) => {
-  const friendsID = Number(req.params.friendsID); // Convert route param to number
-  const friend = friends[friendsID]; // Get the friend with matching index
-  if (friend) {
-    res.status(200).json(friend); // If found, send friend data with 200 OK
-  } else {
-    res.status(404).json({ error: 'Friend does not exist' }); // If not found, send 404
-  }
-});
+app.use(express.json())
 
-// /messages route (GET): responds with simple HTML
-app.get('/messages', (req, res) => {
-  res.send('<ul><li>Hello dear!</li><li>Coders here!</li></ul>');
-});
+app.post('/friends', friendController.postFriend)
 
-// /messages route (POST): logs request and responds with confirmation
-app.post('/messages', (req, res) => {
-  console.log('Updating the messages'); // Logs to terminal
-  res.send('Message received'); // Sends back confirmation
-});
+app.get('/friends', friendController.getFriends);
 
-// Start the server
+app.get('/friends/:friendsID', friendController.getFriend);
+
+app.get('/messages', messageController.getmessages);
+
+app.post('/messages', messageController.postMessage);
+
 app.listen(PORT, () => {
-  console.log(`Listening on ${PORT}...`);
+  console.log(`Server running on port ${PORT}`); // Start server
 });
