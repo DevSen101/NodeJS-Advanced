@@ -10,8 +10,8 @@ const PORT = 3000;
 // Define a mock array of friends data
 const friends = [
   { id: 0, name: 'Bhagat Singh' },
-  { id: 1, name: 'Rajguru' },
-  { id: 2, name: 'Sukhdev' },
+  { id: 1, name: 'Rajguru ji' },
+  { id: 2, name: 'Sukhdev ji' },
   { id: 3, name: 'Swami Vivekananda' }
 ];
 
@@ -19,6 +19,13 @@ const friends = [
 app.get('/', (req, res) => {
   res.send('Hello'); // Sends simple text response
 });
+
+app.use((req, res, next) => {
+  const start = Date.now()
+  next();
+  const delta = Date.now() - start
+  console.log(`${req.method} ${req.url} ${delta}ms `);
+})
 
 // /friends route: responds with all friends as JSON
 app.get('/friends', (req, res) => {
