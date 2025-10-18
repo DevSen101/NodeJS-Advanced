@@ -2,7 +2,7 @@ const path = require('path')
 
 function getmessages(req, res){
   // res.send('<ul><li>Hello dear!</li><li>Coders here!</li></ul>'); // Send HTML
-  res.sendFile(path.join(__dirname,'..' ,'/public' ,'ram.jpg'))
+  res.sendFile(path.join(__dirname,'..','/public','/images' ,'ram.jpg'))
 }
 
 function postMessage(req, res){

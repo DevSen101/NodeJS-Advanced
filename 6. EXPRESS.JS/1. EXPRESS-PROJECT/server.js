@@ -1,27 +1,39 @@
-const express = require('express'); // Import Express
-const messagesRouter = require('./routes/messages.router')
-const friendRouter = require('./routes/friends.router')
+// Import required modules
+const express = require('express');
+const path = require('path');
 
-const app = express(); // Create Express app
+// Import route handlers
+const messagesRouter = require('./routes/messages.router');
+const friendRouter = require('./routes/friends.router');
 
-const PORT = 3000; // Port number
+// Initialize Express app
+const app = express();
+const PORT = 3000; // Define port number
 
+// Root route
 app.get('/', (req, res) => {
-  res.send('Hello'); // Root route: send plain text
+  res.send('Hello');
 });
 
+// Custom logger middleware
 app.use((req, res, next) => {
-  const start = Date.now(); 
-  next(); // Move to next middleware/route
-  console.log(`${req.method} ${req.baseUrl} ${req.url} ${Date.now() - start}ms`); // Log request info
+  const start = Date.now();      // Track start time
+  next();                        // Pass control to next middleware
+  const duration = Date.now() - start;
+  console.log(`${req.method} ${req.baseUrl}${req.url} ${duration}ms`);
 });
 
-app.use(express.json())
+// Middleware to parse incoming JSON data
+app.use(express.json());
 
-app.use('/friends', friendRouter)
-app.use('/messages', messagesRouter)
+// Serve static files from 'public' folder at '/site' path
+app.use('/site', express.static(path.join(__dirname, 'public')));
 
+// Use modular routers
+app.use('/friends', friendRouter);
+app.use('/messages', messagesRouter);
 
+// Start the server
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`); // Start server
+  console.log(`Server running on port ${PORT}`);
 });
