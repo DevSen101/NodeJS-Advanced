@@ -1,0 +1,50 @@
+CRUD Operations in REST APIs
+----------------------------
+
+CRUD stands for Create, Read, Update, and Delete — the four basic operations performed on data.
+
+Each CRUD operation corresponds to an HTTP method:
+- Create → POST
+- Read → GET
+- Update → PUT or PATCH
+- Delete → DELETE
+
+1. Create (POST)
+   - Used to add new data to a collection.
+   - Example: POST /customers → creates a new customer.
+   - Response code: 201 (Created).
+
+2. Read (GET)
+   - Used to retrieve data.
+   - Example: GET /customers → returns all customers.
+   - Example: GET /customers/:id → returns one customer.
+
+3. Update (PUT or PATCH)
+   - PUT replaces an entire existing resource with new data.
+   - PATCH modifies only specific fields of a resource.
+   - Example: PUT /customers/:id → replace the whole object.
+   - Example: PATCH /customers/:id → update only some properties.
+
+4. Delete (DELETE)
+   - Used to remove data.
+   - Example: DELETE /customers/:id → deletes a specific customer.
+   - Example: DELETE /customers → deletes the entire collection (rare).
+
+Collection vs. Item
+- Operations can apply to an entire collection (e.g., /customers)
+  or a single item using its ID (e.g., /customers/:id).
+
+HTTP Status Codes
+- 200 OK → Successful request.
+- 201 Created → Resource created.
+- 404 Not Found → Resource or endpoint not found.
+- 405 Method Not Allowed → Method not valid for endpoint.
+
+Key Points
+- CRUD maps directly to HTTP methods.
+- Use correct status codes for clarity.
+- Usually work with one item at a time, not the whole collection.
+- PUT replaces; PATCH modifies specific fields.
+
+In short:
+CRUD → HTTP → RESTful API foundation.
