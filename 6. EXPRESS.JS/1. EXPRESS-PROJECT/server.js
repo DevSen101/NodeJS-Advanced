@@ -8,12 +8,16 @@ const friendRouter = require('./routes/friends.router');
 
 // Initialize Express app
 const app = express();
+
+app.set('view engine' , 'hbs')
+app.set('views', path.join(__dirname, 'views'))
+
 const PORT = 3000; // Define port number
 
 // Root route
-app.get('/', (req, res) => {
-  res.send('Hello');
-});
+// app.get('/', (req, res) => {
+//   res.send('Hello');
+// });
 
 // Custom logger middleware
 app.use((req, res, next) => {
@@ -28,6 +32,13 @@ app.use(express.json());
 
 // Serve static files from 'public' folder at '/site' path
 app.use('/site', express.static(path.join(__dirname, 'public')));
+
+app.get('/', (req, res) => {
+  res.render('index', {
+    title: 'My server page',
+    caption:'Let\'s do it!'
+  })
+})
 
 // Use modular routers
 app.use('/friends', friendRouter);
