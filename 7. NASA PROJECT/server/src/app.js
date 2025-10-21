@@ -1,13 +1,8 @@
-// Import the Express framework
-const express = require('express');
+const express = require('express');    // Import Express
+const planetsRouter = require('./routes/planets/planets.router')
+const app = express();                  // Create Express app
 
-// Create an instance of an Express application
-// This 'app' object will be used to define routes and middleware
-const app = express();
+app.use(express.json());                // Middleware to parse JSON request bodies
+app.use(planetsRouter)
 
-// Built-in middleware to parse incoming JSON request bodies
-// Without this, req.body will be undefined for JSON payloads
-app.use(express.json());
-
-// Export the 'app' instance so it can be used in other files (like server.js)
-module.exports = app;
+module.exports = app;                   // Export app for use in server.js
