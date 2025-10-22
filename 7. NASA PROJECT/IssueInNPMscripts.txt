@@ -1,5 +1,4 @@
 the npm run watch command may not start both your client and server, depending on your shell. To solve this:
-
 You can use an NPM package like concurrently or npm-run-all instead of the & symbol in the npm run watch command.
 
 Or if you have the bash shell installed on your machine (for example, through Git for Windows), set the default shell used by NPM to the bash shell by typing: npm config set script-shell bash in your terminal. All commands in your package.json will now run in a bash shell.

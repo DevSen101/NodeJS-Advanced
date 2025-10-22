@@ -3,13 +3,21 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "server": "cd server && npm run watch",
-    "client": "cd client && npm start",
-    "watch":"concurrently \"npm run client\" \"npm run server\"",  
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "install-server": "npm install --prefix server",
+    "install-client": "npm install --client",
+    "install": "concurrently \"npm run install-server\" \"npm run install-client\"",
+    "server": "npm run watch --prefix server",
+    "client": "npm start --prefix client",
+    "watch": "concurrently \"npm run server\" \"npm run client\"",
+    "test": "concurrently \"npm run test --prefix server\" \"npm run test --prefix client\"",
+    "deploy": "concurrently \"npm run build --prefix client\" \"npm start --prefix server\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "concurrently": "^9.2.1",
+    "morgan": "^1.10.1"
+  }
 }
