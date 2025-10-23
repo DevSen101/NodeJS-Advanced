@@ -17,8 +17,8 @@ app.use(morgan('combined'))              //Middleware to log some information as
 app.use(express.json());                // Middleware to parse JSON request bodies
 app.use(express.static(path.join(__dirname, '..', 'public')))    //Middleware to serve static file
 
-app.use(planetsRouter)
-app.use(launchesRouter)
+app.use('/planets', planetsRouter)
+app.use('/launches', launchesRouter)
 
 app.get('/', (req, res) => {  
  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'))
