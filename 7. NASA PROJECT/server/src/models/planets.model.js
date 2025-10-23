@@ -39,7 +39,11 @@ columns: true,// columns: true – tells parser to use the first row as column h
 })
 }
 
+function getAllPlanets(){
+  return habitablePlanets
+}
+
 module.exports = {
  loadPlanetsData,
- planets: habitablePlanets
+ getAllPlanets
 }

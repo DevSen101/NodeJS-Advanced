@@ -5,19 +5,23 @@ const morgan = require('morgan')
 
 
 const planetsRouter = require('./routes/planets/planets.router')
+const launchesRouter = require('./routes/launches/launches.router')
 const app = express();                  // Create Express app
 
 app.use(cors({
  origin: 'http://localhost:3000',        //Add Cors Middleware
 }))
 
-app.use(morgan('combined'))
+app.use(morgan('combined'))              //Middleware to log some information as per client requests
 
 app.use(express.json());                // Middleware to parse JSON request bodies
-app.use(express.static(path.join(__dirname, '..', 'public')))
+app.use(express.static(path.join(__dirname, '..', 'public')))    //Middleware to serve static file
+
 app.use(planetsRouter)
-app.get('/', (req, res) => {
- res.sendFile(path.join(__dirname, '..', 'public'))
+app.use(launchesRouter)
+
+app.get('/', (req, res) => {  
+ res.sendFile(path.join(__dirname, '..', 'public', 'index.html'))
 })
 
 
