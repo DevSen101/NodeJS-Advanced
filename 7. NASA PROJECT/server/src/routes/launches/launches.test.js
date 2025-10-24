@@ -1,14 +1,44 @@
 const request = require('supertest');
 const app = require('../../app')
+
 describe('Test GET /launches', () => {
  test('It should respond with 200 success', async () => {
   const response = await request(app)
-  .get('/launches').expect(response.statusCode).toBe(200);
- })
+  .get('/launches')
+  .expect(200)
+  .expect('Content-Type', /json/)
+  })
 })
 
+
 describe('Test POST /launch', () => {
- test('It should respond with 200 success', () => {
+  const completeLaunchData = {
+      mission: "Uss Enterprise",
+      rocket: "RSS KT-17",
+      target: "Kepler-186 f",
+      launchDate: "January 4, 2028"
+  }
+
+  const launchDataWithoutDate = {
+      mission: "Uss Enterprise",
+      rocket: "RSS KT-17",
+      target: "Kepler-186 f",
+    
+  }
+
+ test('It should respond with 201 created', async () => {
+    const response = await request(app)
+    .post('/launches')
+    . send(completeLaunchData)
+    .expect('Content-Type', /json/)
+    .expect(201)
+
+    const requestDate = new Date(completeLaunchData.launchDate).valueOf();
+    const responseDate = new Date(response.body.launchDate).valueOf();
+    expect(requestDate).toBe(requestDate)
+
+    expect(response.body).toMatchObject(launchDataWithoutDate)
+
 
  })
 
