@@ -1,0 +1,47 @@
+TOPIC: DATABASE SHARDING
+
+1. **Problem Motivation**
+   - Vertical scaling has limits; a single machine can only grow so much.
+   - Large databases with massive data and operations require **horizontal scaling** (multiple machines working together).
+
+2. **Sharding Definition**
+   - **Sharding** is the process of **splitting a database into smaller, more manageable pieces (shards)**.
+   - Each shard holds a **subset of the data** and works as part of the larger database system.
+   - Purpose: Handle **huge amounts of data** and maintain **query performance**.
+
+3. **How Sharding Works**
+   - Example: Facebook user profiles.
+     - Too many users to fit on one machine.
+     - Split data across multiple databases (shards):
+       - Users A–J → Database 1
+       - Users K–T → Database 2
+       - Users U–Z → Database 3
+   - Each shard stores **only a portion of the total data**.
+
+4. **Routing System**
+   - A **router or coordinator** is needed to determine **which shard contains the requested data**.
+   - Example:
+     - User “Andre” logs in.
+     - Router checks first letter “A” → directs query to **Database 1**.
+   - Benefits:
+     - Queries are **distributed**, reducing load on a single database.
+     - Data storage capacity increases since multiple shards are used.
+
+5. **Sharding Strategies**
+   - **Logical Sharding:** Split data based on logical keys (e.g., username, region).
+   - **Data Volume Sharding:** Split based on how much data each shard can hold.
+   - Many strategies exist; sharding design can become **complex**.
+
+6. **Key Points**
+   - Sharding allows **scaling out** databases beyond the limits of one machine.
+   - Requires:
+     - **Data partitioning strategy**
+     - **Routing system** for queries
+   - Helps maintain **performance** and **storage capacity** in large-scale systems.
+
+7. **Conclusion**
+   - Sharding is essential for **massive, growing databases**.
+   - It distributes both **data and load** across multiple machines.
+   - Implementation complexity is a major consideration and requires careful design.
+
+→ Next video: deeper look into **sharding strategies and implementation**.

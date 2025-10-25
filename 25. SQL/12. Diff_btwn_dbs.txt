@@ -1,0 +1,138 @@
+TOPIC: RELATIONAL DATABASES VS NOSQL DATABASES (PostgreSQL/MySQL vs MongoDB)
+
+1. **Introduction**
+   - One of the biggest debates in backend development: **Relational Databases (SQL)** vs **NoSQL Databases**.
+   - Examples:
+     - Relational: PostgreSQL, MySQL
+     - NoSQL: MongoDB
+   - Popular in **web and mobile application** development.
+   - MongoDB gained attention in early 2000s due to **horizontal scaling** and easy data growth across machines.
+
+2. **Historical Context**
+   - Relational databases initially struggled with horizontal scaling.
+   - MongoDB became popular for its **document-based storage** and **distributed scalability**.
+   - Modern relational databases (like PostgreSQL) have since improved horizontal scaling.
+   - Current trend: **relational databases regaining popularity** due to improved scalability and reliability.
+
+3. **Popularity Trends**
+   - Hiring data (e.g., Hacker News):
+     - PostgreSQL usage and hiring demand **increasing**.
+     - MySQL and MongoDB **slightly declining**.
+   - Since around 2010, **relational databases** have made a comeback as people value **data integrity and consistency**.
+
+4. **Data Models**
+   - **MongoDB (NoSQL – Document Model):**
+     - Stores data in **JSON-like documents**.
+     - Example document:
+       ```json
+       {
+         "firstName": "John",
+         "lastName": "Doe",
+         "phone": "1234567890",
+         "cars": ["BMW", "Audi"],
+         "profession": "Engineer"
+       }
+       ```
+     - All user-related info is stored in **one document**.
+     - Easier to store and retrieve related data together.
+
+   - **Relational Database (SQL – Table Model):**
+     - Data is **split across multiple related tables**.
+     - Example:
+       - `Users` table
+       - `Cars` table (linked to user via foreign key)
+       - `Professions` table
+       - `Locations` table
+     - Data relationships maintained through **keys**.
+
+5. **What "NoSQL" Really Means**
+   - NoSQL ≠ "No SQL" literally.
+   - It means “**Not Only SQL**”.
+   - Uses **different querying methods** (not traditional SQL syntax).
+   - Example: MongoDB uses key-based queries, not `SELECT` statements.
+
+6. **Relational Databases – Pros**
+   - **Normalization:** Avoids data duplication and maintains consistency.
+   - **Data Integrity:** Ensures data accuracy through relationships and constraints.
+   - **ACID Model:**
+     - **A**tomic – all or nothing transactions.
+     - **C**onsistent – database remains valid.
+     - **I**solated – transactions don’t interfere.
+     - **D**urable – changes are permanent after commit.
+   - **Standard Query Language (SQL):**
+     - Universal syntax for many databases.
+     - Once learned, can work across MySQL, PostgreSQL, SQLite, etc.
+   - **Declarative Queries:**
+     - Database optimizes queries internally for performance.
+
+7. **Relational Databases – Cons**
+   - **Fixed Schema:** Must define structure (tables, columns, data types) in advance.
+   - **Less Flexible:** Harder to modify structure later (adding columns can be complex).
+   - **Resists Evolution:** Schema changes may cause downtime.
+   - **Harder Horizontal Scaling:**
+     - Data is linked across tables.
+     - Splitting across machines is complex.
+
+8. **MongoDB (NoSQL) – Pros**
+   - **Schema-less:** No strict structure needed.
+   - **Easy Updates:** Can add or remove fields dynamically.
+   - **Great for Unstructured Data:** Stores varied, nested, or JSON-like data easily.
+   - **Easy Horizontal Scaling:** Designed for distributed systems.
+   - **Fast Reads for Related Data:**
+     - All related data in one document → fewer joins → faster reads.
+
+9. **MongoDB (NoSQL) – Cons**
+   - **Data Duplication:** Same info may exist in multiple documents.
+   - **Consistency Issues:** Harder to maintain ACID properties.
+   - **Limited Query Language:** Must learn MongoDB-specific syntax.
+   - **Data Integrity Risks:** No enforced relationships like SQL foreign keys.
+
+10. **Choosing Between SQL and NoSQL**
+    - **MongoDB (NoSQL)** is ideal when:
+      - Data is **document-based** (e.g., user profiles, product catalogs).
+      - Schema changes frequently.
+      - High read performance and flexibility are needed.
+      - Example: **LinkedIn user profile**
+        - Each user’s data is independent.
+        - One user document can store profile info, skills, experience, etc.
+    - **Relational Databases (SQL)** are ideal when:
+      - Data is **highly relational**.
+      - **Consistency and relationships** are critical.
+      - Example: **WordPress blog system**
+        - Separate tables for authors, posts, comments, and categories.
+        - All interconnected.
+
+11. **Example Comparison**
+    - **MongoDB Use Case:**
+      - User Profile (LinkedIn, Instagram, Portfolio)
+      - Fast reads, minimal relationships.
+    - **SQL Use Case:**
+      - Blogs, Forums, eCommerce (Orders linked to Users, Products, Reviews)
+      - Requires multiple relationships.
+
+12. **Modern Trend**
+    - PostgreSQL becoming more popular due to:
+      - Strong ACID compliance.
+      - Support for JSON fields (best of both worlds).
+      - Improved scalability.
+
+13. **Summary Table**
+
+    | Feature | Relational (PostgreSQL/MySQL) | NoSQL (MongoDB) |
+    |----------|-------------------------------|-----------------|
+    | Data Structure | Tables with schema | Documents (JSON) |
+    | Query Language | SQL | Mongo Query (NoSQL) |
+    | Schema | Fixed | Flexible |
+    | Data Relationships | Strong (via Keys) | Weak/Manual |
+    | ACID Compliance | Strong | Weak (Eventual Consistency) |
+    | Horizontal Scaling | Harder | Easier |
+    | Ideal Use | Structured, linked data | Flexible, nested data |
+
+14. **Final Thoughts**
+    - Both models serve different needs.
+    - **SQL databases** are best for structured, consistent, relational data.
+    - **NoSQL databases** are best for flexible, fast, unstructured data.
+    - Example:
+      - LinkedIn Profile → MongoDB
+      - LinkedIn Groups & Connections → PostgreSQL
+    - Best developers understand **both** and choose based on **data design needs**, not trends.

@@ -1,0 +1,52 @@
+TOPIC: ROWS IN THE RELATIONAL MODEL
+
+1. **Definition**
+   - A table consists of **columns** and **rows**.
+   - Columns define **what type of data** can be stored.
+   - Rows represent **actual data entries** that follow those rules.
+
+2. **Row (Tuple)**
+   - A **row** is a **single record of data** in a table.
+   - Another term for a row is **tuple** (pronounced “tuh-puhl”).
+   - **One tuple = one row = one record**.
+   - **Multiple tuples = multiple rows = all records**.
+
+3. **Example**
+   | ID | FirstName | LastName | Sex | DateOfBirth |
+   |----|------------|-----------|-----|-------------|
+   | 1  | Dev        | Sen       | M   | 1999-08-10  |
+   → This is **one tuple (row)** in the table.
+
+4. **Constraint Enforcement**
+   - Each row (tuple) must follow the **constraints/domains** defined by columns:
+     - ID → must be numeric  
+     - FirstName / LastName → must be text  
+     - Sex → must be a single letter (M/F/Other)  
+     - DateOfBirth → must be a valid date
+   - If a row violates these rules, the database will **reject or flag** it.
+
+5. **Cardinality**
+   - The **total number of rows (tuples)** in a table is called the **cardinality**.
+   - Example:
+     - If a table has 5 rows → Cardinality = 5.
+   - **Degree** → number of columns  
+     **Cardinality** → number of rows
+
+6. **Terminology Summary**
+   | Concept | Meaning | Example |
+   |----------|----------|----------|
+   | Column / Attribute | Defines type of data | `DateOfBirth` |
+   | Domain / Constraint | Rules for valid data | Only Date values |
+   | Row / Tuple | One complete record | (1, Dev, Sen, M, 1999-08-10) |
+   | Degree | Number of columns | 5 |
+   | Cardinality | Number of rows | 10 |
+
+7. **Key Points**
+   - Rows store **actual data**.
+   - Each row must **obey column constraints**.
+   - The collection of all rows = **cardinality**.
+   - The collection of all columns = **degree**.
+
+→ **Summary:**
+Rows (tuples) are individual data records that strictly follow column constraints.  
+The total number of rows in a table is called its **cardinality**, while the total number of columns defines its **degree**.

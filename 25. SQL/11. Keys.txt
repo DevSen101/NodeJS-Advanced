@@ -1,0 +1,81 @@
+TOPIC: PRIMARY KEY AND FOREIGN KEY IN THE RELATIONAL MODEL
+
+1. **Introduction**
+   - The **relational model** allows linking data across multiple tables.
+   - This is achieved using **keys** — primarily the **Primary Key** and **Foreign Key**.
+
+2. **Primary Key**
+   - A **Primary Key** is a unique identifier for each record (row) in a table.
+   - It ensures that every record can be **uniquely identified**.
+   - Example:
+     | ID | Name      | Role     |
+     |----|-----------|----------|
+     | 1  | McGeeney  | Employee |
+     | 2  | Clyde     | Manager  |
+   - Here, `ID` is the **Primary Key**.
+   - No two rows can have the same primary key value.
+   - Importance:
+     - Prevents duplicate data.
+     - Enables reliable relationships between tables.
+     - Allows efficient searching and referencing.
+
+3. **Purpose of Uniqueness**
+   - Each ID represents **one specific entity**.
+   - For example:
+     - ID 1 → McGeeney  
+     - ID 2 → Clyde
+   - This uniqueness allows us to confidently link related data.
+
+4. **Foreign Key**
+   - A **Foreign Key** is a field in one table that **references the Primary Key of another table**.
+   - It creates a **relationship** between two tables.
+   - Example:
+     - Table: **Managers**
+       | ManagerID | ManagerName |
+       |------------|-------------|
+       | M1         | Clyde Bowie |
+       | M2         | John Wick   |
+
+     - Table: **Employees**
+       | EmpID | EmpName  | ManagerID |
+       |--------|----------|-----------|
+       | 1      | McGeeney | M1        |
+       | 2      | Moe      | M1        |
+   - Here:
+     - `ManagerID` in **Managers** → **Primary Key**
+     - `ManagerID` in **Employees** → **Foreign Key**
+   - The foreign key “M1” in Employees table refers to Clyde Bowie in the Managers table.
+
+5. **Relationship Formation**
+   - The **foreign key column** in one table is used to connect it to another table’s primary key.
+   - This establishes a **one-to-many** or **many-to-one** relationship.
+   - Example:
+     - One Manager can manage many Employees.
+     - Many Employees can be linked to the same ManagerID.
+
+6. **Referential Integrity**
+   - When two tables are linked by keys:
+     - The primary key **cannot be deleted or changed** if it is referenced as a foreign key elsewhere.
+     - Doing so would cause **data inconsistency**.
+   - Example:
+     - If ManagerID “M1” is deleted in the Managers table, all Employees linked to M1 would lose reference.
+     - Therefore, databases **prevent** deletion or modification unless references are updated.
+
+7. **Key Concepts Recap**
+   | Concept | Description | Example |
+   |----------|--------------|----------|
+   | Primary Key | Unique identifier for each record | `EmpID = 1` |
+   | Foreign Key | References primary key in another table | `ManagerID = M1` |
+   | Relationship | Logical link between tables | Employees → Managers |
+   | Referential Integrity | Prevents broken relationships | ManagerID must exist in Managers table |
+
+8. **Summary**
+   - The **Primary Key** uniquely identifies each record in its own table.
+   - The **Foreign Key** links one table’s record to another’s unique identifier.
+   - Together, they form the backbone of the **Relational Model**.
+   - This ability to create and enforce relationships between data makes relational databases powerful and reliable.
+
+→ **In short:**  
+**Primary Key** = Unique identity of a record.  
+**Foreign Key** = Reference to that identity from another table.  
+This is what makes the *Relational Model* truly relational.

@@ -1,0 +1,57 @@
+TOPIC: COLUMNS IN THE RELATIONAL MODEL
+
+1. **Definition**
+   - A table is made up of **columns** and **rows**.
+   - Each **column** represents a specific type of data (e.g., last name, date of birth).
+   - Each column has a **name** and a **data type**.
+
+2. **Degree of a Relation**
+   - The **collection of all columns** in a table is called the **degree of the relation**.
+   - Example: If a table has columns – ID, First Name, Last Name, Sex, Date of Birth –  
+     → the **degree** of this relation = 5.
+
+3. **Domain / Constraint**
+   - Each column stores a **specific type of data**, defined by its **domain**.
+   - **Domain** = The set of allowed values for that column.
+   - Also known as a **constraint**, since it restricts what can be stored.
+
+   Examples:
+   - `DateOfBirth` → Only valid date values allowed.
+   - `Sex` → Only ‘M’, ‘F’, or other defined letters allowed.
+   - `ID` → Only numbers allowed.
+
+4. **Terminology Equivalence**
+   - **Column** = **Attribute**
+   - **Collection of Columns** = **Degree of the Relation**
+   - **Constraint / Domain** = The **allowed type of data** for a column.
+
+   So, one can say:
+   - “The table has these attributes.”
+   - “The relation has a degree of 5.”
+   - “This column has a domain of dates.”
+
+5. **Importance of Domains/Constraints**
+   - Ensures **data consistency and accuracy**.
+   - Prevents insertion of invalid or unexpected data.
+   - Makes the database **structured and reliable**.
+
+6. **Summary**
+   - Every **table** has one or more **columns**.
+   - Each column:
+     - Has a **name**.
+     - Has a **data type / domain**.
+     - Represents a **specific attribute** of the data.
+   - The collection of columns defines the **degree** of the table.
+   - **Constraints (Domains)** restrict what kind of data can be stored.
+
+→ Example:
+| ID | FirstName | LastName | Sex | DateOfBirth |
+|----|------------|-----------|-----|-------------|
+| 1  | Dev        | Sen       | M   | 1999-08-10  |
+
+- Degree = 5  
+- Domains:
+  - ID → Integer  
+  - FirstName, LastName → Text  
+  - Sex → Char(1)  
+  - DateOfBirth → Date

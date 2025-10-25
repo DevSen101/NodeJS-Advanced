@@ -1,0 +1,41 @@
+TOPIC: TABLE IN RELATIONAL MODEL
+
+1. A **table** in the relational model represents a real-world entity or object.
+   - Examples: user, student, teacher.
+
+2. Each **table has a name** that represents the concept of the data being stored.
+   - Example: table name = "User".
+
+3. A **table is similar to an Excel sheet**:
+   - The **sheet name** is like the **table name**.
+   - The **columns** in Excel are like the **attributes/fields** of the table.
+   - The **rows** represent individual data records.
+
+4. **Structure of a Table:**
+   - **Name:** Represents the object (e.g., “User”).
+   - **Columns:** Represent data fields.
+     - Each column stores a specific type of data.
+     - Example columns: ID, First Name, Last Name, Gender, Date of Birth.
+   - **Rows:** Each row represents one record (one object instance).
+
+5. **Example Table: USER**
+   | ID | First Name | Last Name | Gender | Date of Birth |
+   |----|-------------|------------|---------|---------------|
+   | 1  | Dev         | Sen        | Male    | 1999-08-10    |
+
+6. **Columns vs Rows**
+   - Columns define **what kind of data** will be stored.
+   - Rows define **actual instances** of data.
+
+7. **Comparison with Excel Sheet:**
+   - Excel has generic columns (A, B, C, D…)
+   - In relational tables, columns have **explicit names and data types**.
+   - Excel allows any data type in any cell; tables **enforce specific types** per column.
+
+8. **Nuance in Relational Tables:**
+   - Tables are **structured and strict**.
+   - You must define **how data is stored** and **what type of data** each column holds.
+   - Ensures **data consistency and integrity**.
+
+→ **Summary:**
+A table is a named structure in the relational model that stores data in rows and columns. Each row represents an individual record, and each column represents a specific attribute of the data. Unlike Excel, relational tables are designed with strict rules, data types, and relationships to maintain structured data storage.
