@@ -1,0 +1,25 @@
+# Node.js Worker Threads — Notes
+
+## Introduction
+- Worker Threads is a built-in Node.js module that allows JavaScript to run in parallel.
+- Useful for **CPU-intensive** tasks that could block the main thread.
+- Enables true **multi-threaded execution** within Node.js, though JavaScript itself remains single-threaded by design.
+
+---
+
+## Concept Overview
+- Normally, Node.js runs JavaScript on **a single thread** (the event loop).
+- Worker Threads introduce **parallel execution** without changing Node’s core behavior.
+- Each worker runs in a **separate V8 isolate** (an independent instance of the V8 engine).
+
+---
+
+## How Worker Threads Work
+- They are based on **Web Workers** (like in browsers).
+- Each worker thread runs JavaScript **independently**, using separate memory and event loops.
+- They are created using the `Worker` class from the `worker_threads` module.
+
+Example structure:
+```js
+const { Worker } = require('worker_threads');
+const worker = new Worker('./worker.js');
