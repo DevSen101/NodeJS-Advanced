@@ -1,0 +1,27 @@
+SQL Overview
+
+1. What is SQL?
+- SQL (Structured Query Language) is used to communicate with databases.
+- It's a programming language designed to request, insert, update, and manage data.
+- Provides instructions to get specific outputs (data) from databases.
+
+2. Understanding Databases
+- A database is a structured set of data.
+- Structure determines how data is stored and accessed.
+- Examples of structures:
+  - Notepad: custom headings and paragraphs.
+  - Excel: rows and columns.
+- Large companies like Amazon or Microsoft require robust databases, not flat files or spreadsheets.
+
+3. Database Models
+- Different models define how data is stored and organized.
+- This course will cover multiple models but mainly focus on one key model.
+
+4. SQL Usage
+- SQL statements are instructions given to the database.
+- Statements are called queries.
+- Queries are used to:
+  - Pull data
+  - Insert data
+  - Update data
+  - Manage database operations

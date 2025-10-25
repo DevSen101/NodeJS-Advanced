@@ -1,0 +1,36 @@
+History of SQL
+---------------
+
+1. Introduction
+- We already know what SQL and queries are, and why SQL is declarative.
+- Now we look at the history of SQL — how it started and evolved.
+
+2. Origin
+- The original name of SQL was SEQUEL.
+- SEQUEL stood for "Structured English Query Language".
+- Due to copyright issues, the name was shortened to SQL (Structured Query Language).
+- Both names (SQL and SEQUEL) are still used interchangeably.
+
+3. Timeline
+- SQL was developed in the **early 1980s**.
+- It became the **standard language** for storing and manipulating data.
+- The foundation was laid in the **1970s** by IBM researchers.
+
+4. Key Contributors
+- **Edgar F. Codd (IBM)** wrote a paper in the 1970s titled:
+  "A Relational Model of Data for Large Shared Data Banks".
+- His paper introduced the **relational model**, which inspired SQL.
+- Two IBM developers, **Donald Chamberlin** and **Raymond Boyce**, implemented Codd’s vision.
+- They created the **first version of SQL** — both the language and database software.
+
+5. Importance
+- SQL became the standard for **managing and manipulating databases**.
+- The relational model and SQL revolutionized data storage and access.
+- These IBM researchers laid the foundation for all modern relational databases.
+
+6. Summary
+- SQL = Structured Query Language (formerly SEQUEL).
+- Invented at IBM in the 1970s → standardized in the 1980s.
+- Based on Codd’s relational model.
+- Created by Chamberlin and Boyce.
+- Remains the standard language for relational databases today.

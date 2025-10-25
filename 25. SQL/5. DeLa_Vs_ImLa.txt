@@ -1,0 +1,39 @@
+Declarative vs Imperative Programming
+-------------------------------------
+
+1. Declarative Language
+- You specify WHAT should happen, not HOW it happens.
+- Example:
+  SELECT * FROM users;
+  -> You ask for data, and the system figures out how to get it.
+- Focuses on the result, not the process.
+- Like ordering a ham sandwich — you just say what you want and get it.
+- Happens behind the scenes (a "black box").
+
+2. Imperative Language
+- You specify HOW things should happen, step by step.
+- Example:
+  - Slice bread
+  - Add ham
+  - Make sandwich
+- Focuses on control and sequence.
+- You are the one giving exact instructions.
+- Offers more flexibility but requires more work.
+
+3. Key Differences
+| Aspect      | Declarative                     | Imperative                    |
+|--------------|----------------------------------|--------------------------------|
+| Focus        | What to do                      | How to do it                  |
+| Control      | Low                             | High                          |
+| Simplicity   | Simple, concise                 | Detailed, complex             |
+| Examples     | SQL, HTML                       | Java, C, C++                  |
+| Use Case     | Databases, UI                   | Logic-heavy tasks             |
+
+4. Examples in Practice
+- Declarative: SQL (SELECT * FROM users), HTML (<h1>Hello</h1>)
+- Imperative: Java (define all steps manually)
+- Python: Can work in both styles.
+
+5. Summary
+- Declarative = Simpler, less control, more productivity.
+- Imperative = More control, more complexity, more flexibility.

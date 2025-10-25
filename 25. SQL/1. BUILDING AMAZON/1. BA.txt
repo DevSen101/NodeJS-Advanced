@@ -1,0 +1,57 @@
+# Understanding Amazon's Use of Databases
+
+1. Introduction
+- Exercise goal: Understand how Amazon uses databases.
+- Scenario: Back in the 1990s when Amazon just started.
+
+2. Early Order Tracking
+- Initial method: Notebook and pen.
+  - Example: Joe orders a Harry Potter book.
+  - Jeff records customer name, address, and payment info manually.
+- Problem: Manual tracking becomes overwhelming as orders increase.
+
+3. Using Spreadsheets
+- Next step: Jeff uses Excel to track orders.
+- Benefits: Cleaner and more organized than pen and paper.
+- Example Orders:
+  - Andre orders a toy duck (quantity: 2)
+  - Moe buys 100 candies
+  - Bruno buys hair gel
+  - Sally buys a Harry Potter book
+- Issue: Multiple orders, returns, and address changes make spreadsheets confusing.
+  - Example: Andre orders glasses, returns them, moves to Japan, orders again.
+- Limitation: Spreadsheet rows increase, making management harder.
+
+4. Need for Databases
+- Problem: Spreadsheets cannot efficiently handle growing data and complex operations.
+- Solution: Use a database system to manage data more efficiently.
+
+5. Interactive Database Playground
+- Online interactive platform introduced for practice.
+- Database structure:
+  - Tables for customers, orders, products, categories.
+  - Example data:
+    - 91 customers
+    - 8 categories
+  - Each table has columns for relevant information (IDs, names, addresses, etc.)
+- Querying:
+  - Use SQL statements to retrieve and manipulate data.
+  - Example: `SELECT * FROM customers;`
+- Benefits over spreadsheets:
+  - Organized in tables.
+  - Can handle large amounts of data.
+  - Can perform queries to get exactly what is needed.
+
+6. Practice Task
+- Users are encouraged to explore the playground:
+  - Click categories.
+  - Run SQL statements.
+  - Observe how data is structured and retrieved.
+- Goal: Understand differences between spreadsheet-based tracking and database systems.
+
+7. Key Takeaways
+- Spreadsheets are good for small-scale data but not scalable.
+- Databases allow efficient storage, retrieval, and management of large and complex datasets.
+- SQL is used to interact with database tables.
+- This sets the stage for understanding Amazon’s scalable database system.
+

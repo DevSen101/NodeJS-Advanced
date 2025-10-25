@@ -1,0 +1,36 @@
+SQL Standards and Standardization
+----------------------------------
+
+1. Introduction
+- SQL is the language used to communicate with databases.
+- Many companies (Microsoft, Oracle, PostgreSQL, MySQL, etc.) build database systems.
+- All these companies use SQL, but it must stay consistent across implementations.
+
+2. What is Standardization?
+- SQL is a standardized language — meaning it follows a set of defined rules.
+- A committee comes together to decide and update these rules.
+- They define what SQL should support and how it should behave.
+- This ensures compatibility and consistency across different database systems.
+
+3. Why Companies Follow Standards
+- SQL is widely adopted — everyone in the industry understands it.
+- Following standards allows:
+  - Consistent behavior across systems.
+  - Easier learning and usage for developers.
+  - Better compatibility for tools and software.
+- Companies follow the standard but add extra features to stand out (to attract more users).
+
+4. Example
+- Microsoft SQL Server, Oracle, and PostgreSQL all follow the SQL standard.
+- However, each adds unique extensions and optimizations.
+- Despite small differences, the core language remains the same.
+
+5. History of SQL Standards
+- First SQL standard: released in the **1980s**.
+- Updated versions followed in:
+  - 1989
+  - 1992
+  - 1999
+  - 2003
+  - 2008
+  - 201

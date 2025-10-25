@@ -1,0 +1,38 @@
+PostgreSQL for Amazon Orders
+
+1. Problem with Spreadsheets
+- Jeff Bezos initially tracks orders with pen, paper, then Excel.
+- As Amazon grows, spreadsheets become hard to manage: duplicates, moved customers, changing addresses.
+
+2. Solution: Database
+- Install a Database Management System (DBMS) like PostgreSQL.
+- Allows storing, manipulating, and organizing data efficiently.
+
+3. Creating Tables
+- Customers Table:
+  - Each customer has a unique ID.
+  - Keeps track of names, addresses, and contact info.
+  - One record per customer → easy to update address.
+- Products Table:
+  - Each product has a unique ID.
+  - Includes description, price, stock, etc.
+  - One place to update product info.
+- Orders Table:
+  - Each order has a unique ID.
+  - References Customer ID and Product ID.
+  - Includes quantity, price, shipping info.
+
+4. Relations Between Tables
+- Customer ID links Orders → Customers.
+- Product ID links Orders → Products.
+- Updating info in one place updates all related records.
+
+5. Advantages of Relational Database
+- Handles large amounts of data efficiently.
+- Reduces errors from duplicate or outdated info.
+- Structured for easy querying using SQL.
+- More intuitive than Excel for complex systems.
+
+6. Next Steps
+- Explore the playground to see how tables are organized.
+- Practice linking data and understanding orders through SQL queries.

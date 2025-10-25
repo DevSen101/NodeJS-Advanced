@@ -1,0 +1,42 @@
+Types of Databases
+
+1. Overview
+- Hundreds of database management systems (DBMS) exist.
+- Most developers only use a few (2-5) throughout their career.
+- Databases can be categorized into five main types (data models).
+
+2. Relational Databases
+- Examples: PostgreSQL, MySQL, Microsoft SQL Server.
+- Uses tables with rows and columns.
+- Supports ACID transactions.
+- Ideal for e-commerce, business applications, customer data.
+- Strong integration with SQL.
+
+3. Document Databases
+- Examples: MongoDB, CouchDB, Firebase.
+- Data stored as documents (like JSON objects), not tables.
+- Good for scalability and large datasets.
+- Often used in web apps with complex, nested data.
+
+4. Key-Value Databases
+- Examples: Redis, DynamoDB, etc.
+- Stores data as key-value pairs.
+- Simple and fast for retrieval by key.
+- Useful for caching and high-performance operations.
+
+5. Graph Databases
+- Examples: Neo4j, AWS Neptune.
+- Focused on relationships between entities.
+- Useful for social networks, recommendation systems.
+- Less common due to complexity.
+
+6. Wide Column Databases
+- Examples: Google Bigtable, Apache Cassandra.
+- Stores data in columns rather than rows.
+- Optimized for large-scale, distributed storage.
+- Useful for analytics and big data applications.
+
+7. Summary
+- Start with relational and document databases.
+- Key-value, graph, and wide column are specialized models.
+- Understanding differences helps choose the right DB for the use case.

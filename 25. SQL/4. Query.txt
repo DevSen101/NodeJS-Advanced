@@ -1,0 +1,34 @@
+SQL Queries
+
+1. What is a Query?
+- A query is an instruction written in English-like syntax to get data from a database.
+- Synonyms: SQL statement = query.
+- Queries are how we ask questions to the database to get answers.
+
+2. Basic SQL Query
+- Example: `SELECT * FROM users;`
+  - `SELECT`: keyword to retrieve data.
+  - `*`: wildcard to get all fields.
+  - `FROM users`: specifies the table (users) to get data from.
+- Output: all user information (ID, name, last name, date of birth, etc.).
+
+3. Filtering Data
+- Use `WHERE` to filter results.
+- Example: `SELECT name FROM users WHERE role = 'manager';`
+  - `name`: identifier (specific column to retrieve).
+  - `role = 'manager'`: condition to filter data.
+  - `manager`: expression, the value we want to match.
+
+4. SQL Clauses
+- `SELECT` clause: specifies which columns to return.
+- `FROM` clause: specifies the table.
+- `WHERE` clause: defines conditions to filter data.
+- Each clause is a part of the SQL statement.
+
+5. Comments in SQL
+- Use comments to disable lines temporarily.
+- Example: `-- This is a comment`.
+
+6. Declarative Language
+- SQL is a declarative language: you describe *what* you want, not *how* to get it.
+- Example: `SELECT name FROM users WHERE role = 'manager';` asks a question, database decides how to retrieve the data.
