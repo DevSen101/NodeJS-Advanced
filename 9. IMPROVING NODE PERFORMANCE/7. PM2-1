@@ -1,0 +1,227 @@
+PM2 (Process Manager 2) – Complete Notes
+----------------------------------------
+
+1. Introduction
+---------------
+- PM2 stands for Process Manager 2.
+- It is a **Node.js process manager** used to run, monitor, and manage Node.js applications.
+- It keeps applications **alive forever**, even if they crash.
+- PM2 helps manage multiple Node.js processes efficiently.
+- It is mainly used in **production environments** for:
+  * Clustering (multi-core usage)
+  * Monitoring
+  * Automatic restarts
+  * Log management
+  * Zero-downtime deployments
+
+2. Why PM2 is Needed
+--------------------
+Running Node.js apps with `node server.js` has limitations:
+- If the app crashes, you must restart it manually.
+- Node.js runs in a single thread — cannot use all CPU cores.
+- Logs are not managed or stored efficiently.
+- No built-in monitoring or restart mechanism.
+- No load balancing support.
+
+PM2 solves all of these problems by:
+- Keeping apps running 24/7
+- Restarting them automatically on crash
+- Utilizing all CPU cores via clustering
+- Managing logs and monitoring performance
+- Handling production deployment easily
+
+3. Installation
+---------------
+Local installation (recommended):
+> npm install pm2
+
+- Installs PM2 in the project dependencies.
+- Ideal for production deployment inside project folders.
+
+Global installation (optional):
+> npm install -g pm2
+
+- Installs PM2 globally on your system.
+- Lets you run `pm2` commands directly in the terminal.
+
+4. Basic Usage
+--------------
+Start a Node.js server:
+> pm2 start server.js
+
+- Starts your Node.js server and shows CPU and memory usage.
+
+List running processes:
+> pm2 list  
+> pm2 ls  
+> pm2 status
+
+- Displays all managed processes and their status.
+
+Stop a process:
+> pm2 stop server  
+or  
+> pm2 stop <process-id>
+
+Restart a process:
+> pm2 restart server
+
+Delete a process:
+> pm2 delete server
+
+5. Key Features of PM2
+----------------------
+a) **Process Management**
+   - Start, stop, restart, and delete processes easily.
+   - Keeps apps alive even after crashes or reboots.
+
+b) **Clustering Support**
+   - Automatically runs multiple instances of your app using all CPU cores.
+   - Improves performance and handles more requests concurrently.
+
+c) **Auto-Restart**
+   - PM2 restarts your app automatically if it crashes or exits unexpectedly.
+
+d) **Load Balancing**
+   - PM2 distributes requests across all instances automatically.
+
+e) **Logging**
+   - PM2 stores separate application logs, error logs, and restart logs.
+   - Supports real-time logging and log rotation.
+
+f) **Monitoring**
+   - Provides CLI and dashboard tools to view CPU, memory, and uptime metrics.
+   - Run `pm2 monit` to see a live monitoring dashboard.
+
+g) **Deployment & Startup**
+   - PM2 can handle zero-downtime deployments.
+   - Works with CI/CD pipelines and cloud platforms like AWS, Azure, and GCP.
+   - Generates startup scripts to auto-run apps on system boot.
+
+6. Using PM2 with Clustering
+----------------------------
+Start in cluster mode:
+> pm2 start server.js -i 2      (Starts 2 worker processes)  
+> pm2 start server.js -i max    (Starts max workers based on CPU cores)
+
+- The `-i` flag defines how many instances to start.
+- PM2 automatically balances load among workers.
+- Simplifies scaling — no need to manually use Node.js cluster module.
+
+7. Simplified Server Code Example
+---------------------------------
+With PM2, you don’t need cluster logic in your code.
+
+Example server.js:
+----------------------------------------------------
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+  res.end('Hello from PM2 Cluster!');
+});
+
+server.listen(3000, () => {
+  console.log('Server running on port 3000');
+});
+----------------------------------------------------
+- No need to check `isMaster` or manually fork workers.
+- PM2 handles process creation and load balancing automatically.
+
+8. Viewing Logs
+---------------
+View real-time logs:
+> pm2 logs
+
+View last 200 lines of logs:
+> pm2 logs --lines 200
+
+- Logs are automatically saved and persisted by PM2.
+- You can access both old and new logs even after restarts.
+- PM2 supports **log rotation** to prevent massive log files.
+
+9. Restarting and Managing Logs
+-------------------------------
+Restart all processes:
+> pm2 restart all
+
+View logs after restart:
+> pm2 logs --lines 200
+
+- PM2 keeps **historical logs** of master and worker restarts.
+- Helpful for debugging and analyzing production issues.
+
+10. Example Without and With PM2
+--------------------------------
+Without PM2:
+> node server.js
+- Only one process runs.
+- No automatic restart if it crashes.
+- No load balancing or log management.
+
+With PM2:
+> pm2 start server.js -i max
+- Uses all CPU cores.
+- Restarts automatically on failure.
+- Manages logs and uptime.
+- Keeps your app always running.
+
+11. Real-World Use
+------------------
+- Used by companies to deploy scalable Node.js applications.
+- Works seamlessly with cloud services like **AWS, Azure, GCP**.
+- Commonly integrated with **CI/CD pipelines**.
+- Ideal for **production-grade backend systems**.
+
+12. Additional Commands
+-----------------------
+Stop a process:
+> pm2 stop server
+
+Delete a process:
+> pm2 delete server
+
+List all processes:
+> pm2 list
+
+Restart a specific process:
+> pm2 restart <process-name>
+
+Monitor live metrics:
+> pm2 monit
+
+Save running processes for startup:
+> pm2 save
+
+Auto-start PM2 on system reboot:
+> pm2 startup
+
+13. Summary
+-----------
+- PM2 simplifies Node.js process management and scaling.
+- Key Benefits:
+  * Cluster management
+  * Auto-restart on failure
+  * Log management and rotation
+  * Load balancing
+  * Monitoring via CLI
+  * Startup and deployment automation
+- Perfect for **production environments** to ensure high availability and performance.
+
+14. Next Steps
+--------------
+Explore advanced PM2 features:
+- Auto-restart on crash
+- Environment variables
+- Load balancing optimization
+- Monitoring dashboard (`pm2 monit`)
+- Integration with cloud and CI/CD pipelines
+
+15. Final Notes
+---------------
+PM2 turns a normal Node.js server into a:
+→ **High-performance**
+→ **Auto-managed**
+→ **Clustered**
+→ **Production-grade system**
+
+End of Notes.
