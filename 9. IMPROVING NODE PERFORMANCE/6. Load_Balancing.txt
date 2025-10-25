@@ -1,0 +1,30 @@
+Notes on Load Balancing in Node.js
+
+1. Load balancing is a method of distributing incoming requests (load) among multiple servers or processes to optimize performance and resource usage.
+
+2. In Node.js, load balancing ensures no single process or server becomes overloaded while others remain idle.
+
+3. The load balancer acts as an intermediary — it receives requests from clients and distributes them to available servers or processes.
+
+4. Load balancing can be applied to:
+   - Multiple processes running on the same machine (using the cluster module).
+   - Multiple servers handling the same application across different machines.
+
+5. Load balancing relates to scaling:
+   - Vertical Scaling: Increasing the power (CPU, RAM) of a single server.
+   - Horizontal Scaling: Increasing the number of servers or processes running the same application.
+
+6. Horizontal scaling is more efficient for handling large numbers of simultaneous requests since multiple processes or servers share the workload.
+
+7. Common load balancing algorithms:
+   a. Round Robin → Requests are sent sequentially to each process in turn (1st request to process 1, 2nd to process 2, etc.).
+   b. Random Distribution → Each request is assigned randomly to one of the available processes.
+
+8. These simple algorithms (round robin or random) are often most effective when request completion times are unpredictable.
+
+9. In Node.js, the cluster module implements load balancing automatically using the round robin method (except on Windows, where the OS decides the distribution strategy).
+
+10. Summary:
+    - Load balancing = distributing requests evenly.
+    - Cluster module = built-in Node.js tool for load balancing.
+    - Horizontal scaling + load balancing = better server performance and utilization.

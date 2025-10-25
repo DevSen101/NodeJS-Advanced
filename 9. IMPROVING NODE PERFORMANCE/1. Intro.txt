@@ -1,0 +1,67 @@
+Node.js Performance Optimization – Notes
+----------------------------------------
+
+1. Overview
+------------
+Topic: Optimizing performance of Node.js applications.
+Goal: Understand how Node handles requests and how to make it more efficient.
+
+2. Node.js Fundamentals Recap
+------------------------------
+- Node.js servers take requests and process them on the event loop.
+- The event loop runs on a single thread.
+- Node can only execute one line of code at a time.
+- Even though Node is single-threaded, it’s very good at handling multiple requests efficiently.
+
+3. Non-blocking Nature
+-----------------------
+- The event loop passes long tasks (like file I/O or network I/O) to the thread pool.
+- This prevents the main JavaScript thread from blocking or freezing.
+- The thread pool uses multiple OS-level threads for background tasks.
+- Node is designed for non-blocking operations — ideal for:
+  • Reading/writing files
+  • Sending/receiving data over the network
+
+4. Example
+-----------
+- When a request involves reading a file:
+  • Node passes this task to the thread pool.
+  • JavaScript code continues running without waiting.
+  • The result is returned asynchronously later.
+
+5. Strengths of Node
+---------------------
+- Excellent for I/O-bound tasks.
+- Perfect for building applications that make many small requests to other services.
+- Very efficient when the app does not require heavy CPU computation.
+
+6. The Problem: CPU-bound Code
+-------------------------------
+- Sometimes, applications have CPU-intensive code (e.g., complex calculations, encryption, image processing).
+- These tasks can block the event loop since:
+  • JavaScript runs on a single thread.
+  • The event loop cannot continue until the heavy code finishes.
+
+7. Key Challenge
+-----------------
+- Node’s single-thread model becomes a limitation for CPU-heavy tasks.
+- Need to optimize how such tasks are handled — especially on multi-core systems.
+
+8. What’s Next
+---------------
+- To understand performance better:
+  • Build a simple example that demonstrates blocking issues.
+  • Then test different optimization approaches to improve performance.
+
+Core Concept Summary
+---------------------
+Event Loop        : Core of Node.js that handles asynchronous tasks.
+Single Thread     : All JS code runs on one thread.
+Thread Pool       : Used by Node for long-running I/O tasks (non-blocking).
+Blocking Code     : Code that prevents the event loop from processing new requests.
+Non-Blocking Code : Code that allows Node to handle multiple tasks efficiently.
+
+Takeaway
+---------
+- Node.js is highly efficient for I/O tasks but can struggle with CPU-heavy work.
+- To optimize performance, we must offload heavy computation and leverage multi-core processing.

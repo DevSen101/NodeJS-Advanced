@@ -1,0 +1,73 @@
+Node.js Blocking Functions and Performance – Notes
+--------------------------------------------------
+
+1. Overview
+------------
+- Blocking functions can slow down the entire Node.js server.
+- Example: A custom delay function that blocks the event loop.
+- Even though delay is not realistic, there are real functions that behave similarly.
+
+2. Real Examples of Blocking Functions
+--------------------------------------
+a) JSON.stringify() and JSON.parse()
+   - JSON.stringify(): Converts a JavaScript object into a JSON string.
+   - JSON.parse(): Converts a JSON string back into a JavaScript object.
+   - These are synchronous and can block the event loop for a short time.
+   - Normally fast, but can add up when used frequently (e.g., logging many objects).
+
+   Example impact:
+   - If JSON.stringify() takes 10 ms and request handling takes 10 ms,
+     total = 20 ms, doubling response time.
+   - During that 10 ms, no other requests can be processed.
+
+b) Array.sort()
+   - Sorting arrays blocks the event loop until sorting completes.
+   - For small arrays, negligible impact.
+   - For large arrays, sorting can become slow and block Node’s single thread.
+
+c) Crypto module functions
+   - crypto.pbkdf2() and crypto.scrypt() are examples of intentionally slow, CPU-heavy functions.
+   - They are used for password hashing and key derivation.
+   - Purposefully slow to prevent hackers from quickly guessing many passwords.
+
+3. Security Consideration
+--------------------------
+- Slow, blocking hash functions are actually desired in security.
+- They protect users’ passwords by making brute-force attacks harder.
+- These functions generate hashes (random-looking strings) instead of storing passwords directly.
+
+4. Simulating Blocking
+-----------------------
+- Using delay functions simulates worst-case blocking behavior.
+- Example: Blocking event loop for 9 seconds = disastrous for response time.
+- Real-world servers should avoid such long blocking operations.
+
+5. Response Time Importance
+----------------------------
+- Good response time: below 100–200 ms.
+- 100 ms feels instantaneous to users.
+- More than 1 second interrupts user focus.
+- Beyond 3 seconds, users start leaving the website.
+
+6. User Behavior Studies
+-------------------------
+- Studies show:
+  • <100 ms → feels instant.
+  • ~1 second → noticeable delay but acceptable.
+  • >3 seconds → up to 73% of users lose interest.
+- User patience depends on context:
+  • Streaming large files → users expect delay.
+  • Real-time data (like stock prices) → users expect instant response.
+
+7. Impact on Business
+----------------------
+- Every additional millisecond of delay can cost online businesses money.
+- Example:
+  • Calculate revenue loss = average spending × % of users leaving due to delay.
+
+8. Conclusion
+--------------
+- Common blocking functions: JSON.stringify(), JSON.parse(), Array.sort(), crypto.pbkdf2(), crypto.scrypt().
+- Aim for low-latency servers and avoid blocking the event loop.
+- Keep response times under 200 ms for a smooth user experience.
+- Next step: Learn how to optimize or offload these blocking operations to improve performance.

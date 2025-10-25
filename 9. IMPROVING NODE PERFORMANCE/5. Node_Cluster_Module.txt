@@ -1,0 +1,68 @@
+Node.js Cluster Module – Notes
+------------------------------
+
+1. Introduction
+---------------
+- The **Node.js Cluster Module** helps improve server performance.
+- It allows creating **multiple copies (processes)** of your Node.js application.
+- Each process runs your **server code in parallel**, handling requests simultaneously.
+
+2. Master and Worker Processes
+-------------------------------
+- When you start your app (e.g., `node server.js`), Node creates a **main process** called the **master process**.
+- Inside the Cluster module, we have access to a function called **fork()**.
+- Calling **cluster.fork()** creates a **worker process**, which is an exact copy of the master process.
+
+3. Multiple Workers
+--------------------
+- You can call **cluster.fork()** multiple times to create multiple worker processes.
+- Each worker:
+  - Runs the same server code.
+  - Handles HTTP requests.
+  - Responds independently.
+- The **master process** only manages worker creation and coordination — it doesn’t handle requests directly.
+
+4. Example Setup
+-----------------
+- If we call `fork()` twice:
+  - We’ll have 3 Node.js processes total:
+    1. **Master process** – manages workers.
+    2. **Worker 1** – handles some requests.
+    3. **Worker 2** – handles others.
+
+5. Request Distribution (Round Robin)
+-------------------------------------
+- Requests are distributed using the **round-robin approach**:
+  - 1st request → Worker 1  
+  - 2nd request → Worker 2  
+  - 3rd request → Worker 1 again  
+  - and so on.
+- Workers take turns responding to requests.
+- Even if requests vary in execution time (some fast, some slow), round robin is **simple and fair**.
+
+6. Fairness and Performance
+----------------------------
+- Although it’s a simple system, round robin performs **better than complex predictive algorithms** in many cases.
+- It ensures a roughly even distribution of work between all workers.
+
+7. Platform Note (Windows)
+---------------------------
+- On **Windows**, Node.js doesn’t guarantee the round-robin approach.
+- Instead, Windows’ internal **process manager** decides how to distribute tasks.
+- It may use round robin or another scheduling method automatically.
+
+8. Benefits of Using Cluster Module
+-----------------------------------
+✅ Uses **all CPU cores** instead of just one.  
+✅ Handles **more concurrent requests** efficiently.  
+✅ Improves **server performance** and **fault tolerance** (if one worker crashes, others continue).  
+
+9. Summary
+-----------
+- The **Cluster Module** allows Node.js apps to scale across multiple CPU cores.
+- It creates **worker processes** using **cluster.fork()**.
+- The **master process** coordinates, while **workers handle requests**.
+- Default request balancing uses **round robin** (except on Windows).
+- This is the **first and simplest way** to improve Node.js performance through parallel processing.
+
+Next: Implementing the Cluster Module in real code.
