@@ -1,6 +1,7 @@
 const { parse } = require('csv-parse') // require parse fn from csv parse module, that parse CSV content
-const fs = require('fs'); //require fs module, to read file from disk
-const path = require('path');
+const fs = require('fs');              //require fs module, to read file from disk
+const path = require('path');          //require path module, to read file from disk
+const planets = require('./planets.mongo')
 
 const habitablePlanets = []
 
@@ -23,24 +24,43 @@ columns: true,// columns: true – tells parser to use the first row as column h
 // Without this: our results would just have raw chunks or arrays, not clean objects.
  
 }))
-.on('data', (data) => {
+.on('data', async (data) => {
  if (isHabitablePlanet(data)){
-  habitablePlanets.push(data)
- }
+   savePlanet(data)
+  }
  })
 .on('error', (err) =>{
  console.log(err);
  reject(err)
 })
-.on('end', () => {
- console.log(`We found ${habitablePlanets.length} habitable planets.`);
+.on('end', async() => {
+  const countPlanetsFound = (await getAllPlanets()).length
+ console.log(`We found ${countPlanetsFound} habitable planets.`);
  resolve()
 })
 })
 }
 
-function getAllPlanets(){
-  return habitablePlanets
+async function getAllPlanets(){
+  return await planets.find({})
+}
+
+async function savePlanet(planet){
+  try {
+   await planets.updateOne({
+  keplerName: planet.kepler_name
+ },
+ {
+  keplerName: planet.kepler_name
+ },
+ {
+  upsert: true  
+ })  
+  } catch (error) {
+    console.error(`Could not save planet ${error}`);
+  }
+  
+ 
 }
 
 module.exports = {
