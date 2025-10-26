@@ -53,5 +53,7 @@
 - Spreadsheets are good for small-scale data but not scalable.
 - Databases allow efficient storage, retrieval, and management of large and complex datasets.
 - SQL is used to interact with database tables.
-- This sets the stage for understanding Amazon’s scalable database system.
+- This sets the stage for understanding Amazon’s scalable database system. 
+
+
 

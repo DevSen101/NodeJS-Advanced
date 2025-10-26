@@ -49,9 +49,3 @@ module.exports = {
  abortLaunchById
 } 
 
-// {
-//     "mission": "ZTM155",
-//     "rocket": "ZTM Experimental IS",
-//     "destination": "Kepler-186 f",
-//     "launchDate": "January 17, 2030"
-// }
