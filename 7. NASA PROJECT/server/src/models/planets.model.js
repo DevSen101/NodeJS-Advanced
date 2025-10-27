@@ -30,7 +30,10 @@ function loadPlanetsData(){
       savePlanet(data)                                                        // Save to DB
     }
   })
-  .on('error', (err) => { reject(err) })                                       // Handle errors
+  .on('error', (err) => { 
+    console.log(err);
+    reject(err) 
+  })                                       // Handle errors
   .on('end', async() => {                                                     // When done
     const countPlanetsFound = (await getAllPlanets()).length;
     console.log(`We found ${countPlanetsFound} habitable planets.`);          // Log count

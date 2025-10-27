@@ -1,5 +1,18 @@
 const request = require('supertest');
-const app = require('../../app')
+const app = require('../../app');
+const { mongoConnect,
+  mongoDisconnect
+ } = require('../../services/mongo')
+
+describe('Launches API', () => {
+  beforeAll(async () => {
+    await mongoConnect();
+  });
+
+  afterAll(async () => {
+    await mongoDisconnect()
+  })
+
 
 describe('Test GET /launches', () => {
  test('It should respond with 200 success', async () => {
@@ -68,8 +81,7 @@ expect(response.body).toStrictEqual({
 
  expect(response.body).toStrictEqual({
    error: 'Invalid launch date'
-  }) 
+   }) 
+  })
  })
-
-
 })
