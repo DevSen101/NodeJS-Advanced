@@ -1,11 +1,9 @@
 const express = require('express');    // Import Express
 const cors = require('cors')           //Import Cors
 const path = require('path')
-const morgan = require('morgan')
+const morgan = require('morgan');
+const api = require('./routes/api');
 
-
-const planetsRouter = require('./routes/planets/planets.router')
-const launchesRouter = require('./routes/launches/launches.router')
 
 const app = express();                  // Create Express app
 
@@ -17,9 +15,7 @@ app.use(morgan('combined'))              //Middleware to log some information as
 
 app.use(express.json());                // Middleware to parse JSON request bodies
 app.use(express.static(path.join(__dirname, '..', 'public')))    //Middleware to serve static file
-
-app.use('/planets', planetsRouter)
-app.use('/launches', launchesRouter)
+app.use('/v1', api)
 
 app.get('/', (req, res) => {  
  res.sendFile(path.join(__dirname, '..', 'public', 'index.html'))
