@@ -1,10 +1,12 @@
+require('dotenv').config();
 const http = require('http');           // Import Node HTTP module
+
 const app = require('./app');           // Import Express app
 const  { loadPlanetsData } = require('./models/planets.model');
 const { loadLaunchData } = require('./models/launches.model')
 const { mongoConnect } = require('./services/mongo');
 
-const PORT = process.env.PORT || 8000;  // Set 
+const PORT = process.env.PORT // Set 
 
 
 
