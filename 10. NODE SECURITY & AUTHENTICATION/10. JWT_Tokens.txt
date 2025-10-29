@@ -1,0 +1,251 @@
+````markdown
+# JSON Web Tokens (JWT) — Token-Based Authentication
+
+## 1. Introduction
+**JWT (JSON Web Token)** is an **open industry standard (RFC 7519)** for securely representing **claims between two parties**.  
+It is mainly used for **authentication and authorization** in web applications.
+
+JWTs are a form of **access token**, similar to API keys, but they:
+- Identify a specific **user** of an application.
+- Act as **credentials** for accessing protected APIs.
+
+---
+
+## 2. Token-Based (Bearer) Authentication
+
+When a user logs in with their **username and password**:
+1. The **server verifies** the credentials.
+2. If valid, the server **issues an access token** (JWT).
+3. The user sends this **token in every subsequent request** to prove identity.
+
+This process is called **Token-Based Authentication** or **Bearer Authentication**  
+— because the client *bears* (holds) the token to access server resources.
+
+Example request:
+```http
+GET /user/profile
+Authorization: Bearer <your_JWT_token>
+````
+
+---
+
+## 3. Types of Access Tokens
+
+### (a) Opaque Tokens
+
+* Random strings with no readable structure.
+* The server must **validate them by checking another server or database**.
+* Example: Traditional session tokens.
+
+### (b) JWT Tokens
+
+* Follow the **JWT standard**.
+* Contain encoded JSON data.
+* Can be **validated locally** using a signature.
+* More efficient (no extra database lookup).
+
+---
+
+## 4. Why JWT Is Useful
+
+* JWTs can store **custom data** (claims).
+* They are **self-contained** — no extra database query needed.
+* Easy to extend with additional fields (like role, permissions, etc.).
+* Commonly used in **modern authentication systems** (e.g., OAuth 2.0).
+
+---
+
+## 5. JWT Structure
+
+A JWT consists of **three parts**, separated by dots:
+
+```
+xxxxx.yyyyy.zzzzz
+```
+
+| Part | Name          | Description                                                 |
+| ---- | ------------- | ----------------------------------------------------------- |
+| 1️⃣  | **Header**    | Specifies the algorithm (e.g., HS256) and token type (JWT). |
+| 2️⃣  | **Payload**   | Contains the user data and claims.                          |
+| 3️⃣  | **Signature** | Ensures the token hasn’t been tampered with.                |
+
+Example:
+
+```
+Header.Payload.Signature
+```
+
+### Header Example:
+
+```json
+{
+  "alg": "HS256",
+  "typ": "JWT"
+}
+```
+
+### Payload Example:
+
+```json
+{
+  "sub": "user123",
+  "name": "Mark Rober",
+  "admin": true,
+  "iat": 1695315420
+}
+```
+
+### Signature:
+
+* Created using the header, payload, and a **secret key**.
+* Ensures token integrity (prevents tampering).
+
+---
+
+## 6. JWT Encoding and Decoding
+
+* JWTs are **Base64URL encoded** (not encrypted).
+* Anyone can **decode** a JWT and view its payload.
+* The **signature** is what prevents modification, not visibility.
+
+Hence, always send tokens **over HTTPS** to prevent theft.
+
+---
+
+## 7. Example: Adding Custom Data
+
+JWTs can store **custom fields**:
+
+```json
+{
+  "sub": "1234",
+  "name": "Mark",
+  "country": "USA",
+  "admin": true
+}
+```
+
+If a server issues this token:
+
+* It can check `admin: true` to allow access to admin-only routes.
+* Or use `country` to apply regional rules.
+
+JWTs are like **digital passports**:
+They contain identifying data, can be customized, and are verifiable by signature.
+
+---
+
+## 8. Signing & Verifying Tokens
+
+### Signing Process:
+
+1. Combine header and payload.
+2. Encode with Base64URL.
+3. Sign with a **secret key** using the chosen algorithm (e.g., HS256).
+
+### Verifying Process:
+
+* The server decodes the token.
+* Recalculates the signature using the same secret key.
+* If both match → token is valid.
+
+This prevents attackers from creating or editing tokens without the secret.
+
+---
+
+## 9. Security Considerations
+
+✅ **JWTs are signed, not encrypted.**
+
+* Anyone can read payload data if they have the token.
+* Signature prevents forgery but not visibility.
+
+✅ **Always use HTTPS**
+
+* Prevents token theft via network sniffing.
+
+✅ **Short Expiry Time**
+
+* Include an `exp` (expiry claim) to reduce risk if stolen.
+
+✅ **Do not store sensitive data**
+
+* Avoid putting passwords or personal info in the payload.
+
+---
+
+## 10. Common JWT Claims
+
+| Claim | Full Form       | Description                                                |
+| ----- | --------------- | ---------------------------------------------------------- |
+| `sub` | Subject         | The user or entity the token represents (usually user ID). |
+| `iat` | Issued At       | Timestamp of when the token was issued.                    |
+| `exp` | Expiration Time | When the token becomes invalid.                            |
+| `iss` | Issuer          | Who issued the token (server name or URL).                 |
+| `aud` | Audience        | Intended recipient of the token.                           |
+
+Example payload:
+
+```json
+{
+  "sub": "user_123",
+  "name": "Dev Kumar Sen",
+  "role": "admin",
+  "iat": 1714589012,
+  "exp": 1714592612,
+  "iss": "auth.myserver.com"
+}
+```
+
+---
+
+## 11. Best Practices
+
+1. **Use HTTPS** for all token transmission.
+2. **Keep tokens short-lived** (add refresh tokens if needed).
+3. **Store tokens securely** (use `httpOnly` cookies if possible).
+4. **Don’t include sensitive user data** in payload.
+5. **Validate signature** on every request.
+6. **Blacklist invalid tokens** (e.g., after logout).
+
+---
+
+## 12. Advantages of JWT
+
+* Stateless (no session storage needed).
+* Self-contained (includes all necessary info).
+* Fast authentication.
+* Supports distributed systems and microservices easily.
+
+---
+
+## 13. Disadvantages
+
+* Cannot easily revoke a token (until expiry).
+* Larger size compared to opaque tokens.
+* Payload is visible (needs HTTPS for protection).
+
+---
+
+## 14. Summary
+
+| Feature        | Description                     |
+| -------------- | ------------------------------- |
+| **Standard**   | RFC 7519                        |
+| **Structure**  | Header, Payload, Signature      |
+| **Encoding**   | Base64URL                       |
+| **Use Case**   | Authentication & Authorization  |
+| **Secured By** | Digital Signature (HMAC or RSA) |
+| **Not**        | Encrypted by default            |
+| **Requires**   | HTTPS for secure transmission   |
+
+---
+
+### In Short:
+
+> 🔹 JWT = Signed token that identifies and authorizes a user.
+> 🔹 It contains claims (user info) in encoded JSON format.
+> 🔹 It’s stateless, verifiable, and widely used in modern APIs.
+> 🔹 Must always be sent securely (HTTPS).
+
+---

@@ -1,0 +1,67 @@
+```markdown
+# OAuth 2.0 — Overview Notes
+
+## What is OAuth?
+**OAuth (Open Authorization)** is an authentication and authorization standard used by major platforms like **Google**, **Facebook**, and **GitHub** to enable secure sign-ins and data sharing between applications.
+
+It powers **Social Sign-On** — allowing users to log into an app (like Medium) using credentials from another trusted provider (like Google).
+
+---
+
+## Why OAuth Exists
+Traditional login systems require users to enter passwords directly into each app — risky for security.  
+OAuth fixes this by letting users authenticate **through trusted providers** without giving their password to every app.
+
+Example:
+- You choose *“Sign in with Google”* on Medium.
+- You are redirected to **Google’s domain** (accounts.google.com).
+- You enter your password **only on Google’s page**.
+- Google verifies you, then returns a **token** to Medium.
+
+✅ Medium never sees your Google password.  
+✅ The token confirms you’re authenticated.  
+✅ Medium can now access allowed data (like name, email).
+
+---
+
+## How It Works — Simplified Flow
+1. **User clicks “Sign in with Google.”**  
+2. App redirects to **Google’s OAuth server.**  
+3. User logs in and gives consent (what info to share).  
+4. Google sends an **access token** to the app.  
+5. App uses the token to access allowed data (API calls).  
+
+---
+
+## Benefits of OAuth
+- **Security:** Passwords are entered only on trusted domains.  
+- **Centralization:** One secure authentication server (e.g., Google) for all apps.  
+- **User Control:** Users can revoke access anytime.  
+- **Reduced Attack Surface:** Only one heavily secured server handles authentication.  
+- **Convenience:** One login works across multiple services.
+
+---
+
+## Real Example — Medium & Google
+- When signing into **Medium** with Google, you’re redirected to Google’s OAuth server.  
+- Google authenticates you and issues Medium a token.  
+- You can later revoke Medium’s access from your Google Account → Security → “Apps with access.”  
+- Once revoked, Medium can’t access your Google data until you reauthorize it.
+
+---
+
+## Key Terms
+- **OAuth Server (Authorization Server):** Handles user authentication (e.g., Google).  
+- **Client Application:** The app requesting access (e.g., Medium).  
+- **Access Token:** A credential given to the app to access allowed data.  
+- **Consent Screen:** Where the user approves sharing info.  
+
+---
+
+## Summary
+OAuth enables secure, simple, and centralized login across the web.  
+It improves both **user experience** and **security** by:
+- Avoiding password sharing.
+- Minimizing login fatigue.
+- Providing easy account revocation and control.
+

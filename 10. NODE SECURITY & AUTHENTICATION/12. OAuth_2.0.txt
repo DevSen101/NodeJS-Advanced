@@ -1,0 +1,91 @@
+# OAuth 2.0 — Authorization Code Flow
+
+## Overview
+OAuth 2.0 defines a secure process that allows users to authorize applications to access data on their behalf **without sharing passwords**.  
+This is the mechanism behind “Sign in with Google,” “Sign in with GitHub,” etc.
+
+---
+
+## Four Key Roles in OAuth 2.0
+
+1. **Resource Owner (User)**  
+   The person who owns the data and grants permission (e.g., the user logging in via Google).
+
+2. **Client (Application)**  
+   The app requesting access on behalf of the user (e.g., Medium).
+
+3. **Resource Server**  
+   The API or backend that holds the protected data (e.g., Google APIs).
+
+4. **Authorization Server**  
+   The system responsible for authenticating the user and issuing tokens (e.g., accounts.google.com).
+
+---
+
+## Why OAuth?
+OAuth ensures that:
+- Users **never share passwords** directly with third-party apps.
+- Authentication happens **only at the trusted authorization server**.
+- Apps get **temporary access tokens**, not full account credentials.
+
+---
+
+## OAuth 2.0 Flows
+OAuth 2.0 supports multiple authorization flows:
+- **Authorization Code Flow** ✅ *(most secure, commonly used for web apps)*
+- **Implicit Flow** *(used for pure front-end apps)*
+- **Client Credentials Flow** *(used for machine-to-machine communication)*
+
+We focus on the **Authorization Code Flow**, the “gold standard” for web security.
+
+---
+
+## Authorization Code Flow — Step by Step
+
+1. **User Initiates Login**  
+   The client app redirects the browser to the **Authorization Server** (e.g., Google) with a request containing:
+   - Client ID  
+   - Redirect URI  
+   - Scopes (data permissions)
+
+2. **User Authenticates & Consents**  
+   The user logs in on Google’s secure page and approves access for the app.
+
+3. **Authorization Code Issued**  
+   Upon success, Google sends back a **short-lived authorization code** to the app (via redirect URL).
+
+4. **App Requests Access Token**  
+   The app sends this code (along with its **client secret**) to the authorization server securely from its backend.
+
+5. **Access Token Granted**  
+   The authorization server validates everything and returns an **access token** (often a JWT — JSON Web Token).
+
+6. **Access Token Used**  
+   The app uses this token to access protected resources (like user profile data) from the **Resource Server** via API calls.
+
+---
+
+## Tokens
+
+- **Authorization Code:** Temporary code used to request an access token.  
+- **Access Token:** A credential that allows the app to access APIs on the user’s behalf.  
+- **Bearer Token:** Common type of access token — whoever holds it can access the resource.  
+- **JWT (JSON Web Token):** A structured token often used for encoding access data and expiration.
+
+---
+
+## Security Benefits
+- Password is **only entered on the Authorization Server** (never shared with the client).  
+- Tokens are **short-lived and revocable**.  
+- The **attack surface is minimized** since only one highly secure server handles authentication.
+
+---
+
+## Summary
+- OAuth 2.0 Authorization Code Flow is the standard for web-based authentication.  
+- It separates trust boundaries and uses tokens for secure, delegated access.  
+- Users trust providers like Google or GitHub, not every third-party app.
+
+---
+
+**Next:** Practical Example — Implementing OAuth 2.0 in Node.js using Passport.js and Google Login.

@@ -1,0 +1,153 @@
+## 🧠 Notes: OAuth 2.0 Authorization Code Flow (Sign in with Google Example)
+
+### 1. Overview
+
+* OAuth 2.0 Authorization Code Flow is used by web applications to authenticate users securely.
+* It involves **redirects** between the **client application (Medium)**, **authorization server (Google)**, and the **resource owner (user)**.
+* Example: Signing in to Medium.com using “Sign in with Google”.
+
+---
+
+### 2. Initial Request
+
+* When you click **“Sign in with Google”**, your browser makes a request to:
+
+  ```
+  medium.com/connect/google
+  ```
+* Medium responds with a **redirect** (HTTP 302) to:
+
+  ```
+  accounts.google.com/o/oauth2/auth
+  ```
+* This begins the **Authorization Code Flow**.
+
+---
+
+### 3. Authorization Request
+
+* Medium sends several **query parameters** in this request to Google:
+
+| Parameter            | Description                                                                     |
+| -------------------- | ------------------------------------------------------------------------------- |
+| `client_id`          | Identifies the application (Medium).                                            |
+| `redirect_uri`       | Where Google should send the user after successful login (callback URL).        |
+| `response_type=code` | Tells Google that we want an **authorization code** in response.                |
+| `scope`              | Specifies the permissions being requested (e.g., `email`, `profile`, `openid`). |
+| `state` *(optional)* | Used to maintain state and prevent CSRF attacks.                                |
+
+---
+
+### 4. User Authentication and Consent
+
+* Google shows a login page → user enters email and password.
+* Then Google shows a **consent screen**, asking permission to share profile info with Medium.
+* These steps are handled entirely by **Google’s authorization server**.
+
+---
+
+### 5. Redirect Back (Authorization Code)
+
+* After successful login and consent, Google redirects to Medium’s **callback URL**, e.g.:
+
+  ```
+  https://medium.com/callback/authenticate?code=XYZ123
+  ```
+* This redirect includes:
+
+  * `code`: Temporary authorization code
+  * `scope`: Granted permissions
+
+---
+
+### 6. Backend Token Exchange (Server-Side)
+
+* Medium’s **backend server** receives the `code` and exchanges it for tokens by sending a POST request to:
+
+  ```
+  https://oauth2.googleapis.com/token
+  ```
+
+* The request includes:
+
+  * `code`
+  * `client_id`
+  * `client_secret`
+  * `redirect_uri`
+  * `grant_type=authorization_code`
+
+* This step happens **server-side**, not in the browser, because the **client secret must be protected**.
+
+---
+
+### 7. Token Response
+
+* Google responds with:
+
+  ```json
+  {
+    "access_token": "...",
+    "refresh_token": "...",
+    "id_token": "...",
+    "expires_in": 3600,
+    "token_type": "Bearer"
+  }
+  ```
+* Medium stores the tokens securely (in session, cookies, or database).
+
+---
+
+### 8. User Session and Single Sign-On (SSO)
+
+* After login, user is redirected to the Medium homepage as a logged-in user.
+* Google also sets cookies across its domains (e.g., `youtube.com`, `google.com`) enabling **Single Sign-On (SSO)**.
+
+  * If you open YouTube after this, you’re already signed in.
+
+---
+
+### 9. OpenID Connect (OIDC)
+
+* The flow also includes `openid` in the scope → this means **OpenID Connect** is used.
+* **OpenID Connect (OIDC)** sits on top of OAuth 2.0 to provide:
+
+  * User identity verification
+  * Standardized ID token (JWT)
+* OAuth handles authorization; **OIDC adds authentication**.
+
+---
+
+### 10. Summary of Steps
+
+| Step | Action                                | Actor                         |
+| ---- | ------------------------------------- | ----------------------------- |
+| 1    | User clicks “Sign in with Google”     | Browser                       |
+| 2    | Redirect to Google’s `/auth` endpoint | Authorization Server          |
+| 3    | User authenticates & consents         | Google                        |
+| 4    | Redirect back with `code`             | Authorization Server → Client |
+| 5    | Exchange code for tokens              | Client Backend                |
+| 6    | Receive access & refresh tokens       | Authorization Server → Client |
+| 7    | Access user info or API using token   | Client                        |
+| 8    | Redirect to homepage (logged in)      | Browser                       |
+
+---
+
+### 11. Key Takeaways
+
+* **Authorization Code Flow** is secure because:
+
+  * Sensitive tokens are exchanged only on the **server**.
+  * Browser only handles the **temporary code**.
+* **Client Secret** is stored only on the server.
+* **Access Token** allows API calls on behalf of the user.
+* **Refresh Token** allows re-authentication without logging in again.
+* **OpenID Connect** adds user identity info on top of OAuth 2.0.
+
+---
+
+### 12. Benefits
+
+* Secure authentication without exposing credentials.
+* Enables third-party logins like “Sign in with Google”.
+* Provides **Single Sign-On (SSO)** across multiple Google services.
+

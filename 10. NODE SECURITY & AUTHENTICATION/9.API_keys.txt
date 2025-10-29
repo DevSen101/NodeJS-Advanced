@@ -1,0 +1,108 @@
+````markdown
+# Authentication Tools — API Keys, Tokens, and JWT
+
+## Overview
+There are **three main tools** developers use to ensure that **only authorized users** can access a server and its API:
+
+1. **API Keys**  
+2. **Tokens**  
+3. **JSON Web Tokens (JWT)**  
+
+In this note, we’ll focus on **API Keys**, the first and simplest of these methods.
+
+---
+
+## 1. API Keys
+
+### What Is an API Key?
+An **API key** is a unique string used for:
+1. **Identification** – tells the server which application is making the request.  
+2. **Access Control** – grants or restricts access to certain API endpoints.
+
+---
+
+### When Are API Keys Used?
+- Commonly used when **developers** access public APIs (not end users).  
+- Example: Starbucks Store Locator, Google Maps API, Analytics tools like Boomerang.  
+- Useful when the API is public but needs **usage monitoring** or **rate limiting**.
+
+---
+
+### How API Keys Are Sent
+They are sent along with API requests:
+```http
+GET /api/data?key=YOUR_API_KEY
+````
+
+or as an HTTP header:
+
+```http
+Authorization: API_KEY
+```
+
+---
+
+### Public vs Private API Keys
+
+* **Public Keys:**
+  Visible in client-side code, used only to identify the app.
+  Example: A website displaying a Google Map.
+
+* **Private Keys:**
+  Kept secret on the server; used to restrict or secure access to protected endpoints.
+
+---
+
+### Rate Limiting
+
+To prevent abuse, servers limit how many requests can be made per key.
+If the limit is exceeded, the API may respond with:
+
+```
+HTTP 429 Too Many Requests
+```
+
+This ensures fair use and protects the server from overload.
+
+---
+
+### Example: Google Maps API
+
+**Steps to create a key:**
+
+1. Go to [Google Cloud Console](https://console.cloud.google.com/).
+2. Create a new project.
+3. Enable the **Google Maps JavaScript API**.
+4. Generate an **API Key** in *APIs & Services → Credentials*.
+5. **Restrict the key**:
+
+   * By domain (e.g., `www.kalicoffee.com`)
+   * By IP address
+   * By specific API services
+
+**Principle of Least Privilege:**
+Only give the key the minimum permissions needed — e.g., access to Maps JavaScript API only.
+
+---
+
+### Why Restrict Keys?
+
+* Prevents others from stealing and using your key.
+* Ensures the key is valid only on your own domain or app.
+* Protects from billing or quota misuse.
+
+---
+
+### Summary
+
+| Feature            | Description                                         |
+| ------------------ | --------------------------------------------------- |
+| **Purpose**        | Identify and control which apps use your API        |
+| **Security Level** | Basic (not user authentication)                     |
+| **Use Case**       | Public APIs, monitoring, rate limiting              |
+| **Keep Secret?**   | Only for private keys                               |
+| **Next Step**      | Use Tokens or JWTs for user-specific authentication |
+
+---
+
+**Next:** Learn how **Tokens** and **JWTs** provide stronger user authentication and authorization.
