@@ -1,0 +1,45 @@
+# Social Sign-On (Social Login) — Summary Notes
+
+## What is Social Sign-On?
+Social Sign-On (SSO) allows users to log into a website using existing accounts from platforms like **Google**, **Facebook**, **GitHub**, etc., instead of creating new credentials for every site.
+
+---
+
+## Example: Medium.com
+- Medium provides login options using Google, Facebook, and other providers.
+- Users can sign up with Google credentials instead of creating a new Medium username and password.
+- Once logged into Google, users can access Medium instantly — often in just one or two clicks.
+
+---
+
+## Key Advantages
+1. **Convenience** — Users don’t have to remember new passwords.
+2. **Speed** — Sign-up and sign-in become almost instant.
+3. **Consistency** — Profile data (like name and email) can auto-fill from social accounts.
+
+---
+
+## Developer Perspective
+- The app (like Medium) still tracks users internally but offloads authentication to trusted providers.
+- Developers save effort — no need to:
+  - Implement password creation/reset systems.
+  - Manage password storage or encryption.
+- The responsibility of account security is handled by large, experienced providers like Google.
+
+---
+
+## Security Benefits
+- Tech giants like Google and Facebook invest millions in security.
+- They maintain advanced protection against breaches, saving smaller teams from complex authentication challenges.
+- Using their OAuth-based authentication reduces the risk of mishandling passwords.
+
+---
+
+## Summary
+Social Sign-On improves user experience and security by:
+- Simplifying the login process.
+- Reducing password fatigue.
+- Delegating authentication and password management to secure, trusted providers.
+
+---
+**Next Steps:** Learn how to integrate Google OAuth into your Node.js or MERN application.
