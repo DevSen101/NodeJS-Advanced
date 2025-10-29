@@ -1,0 +1,50 @@
+# Authentication vs Authorization
+
+## Why We Need Login
+- Many apps need users to log in to access protected routes or personal data.  
+- Example: Each user (Andre, Larry, Dwight) should only see their own data.  
+
+---
+
+## Authentication
+- **Definition:** Verifies who the user is.  
+- **Purpose:** Confirms identity using credentials like username/password.  
+- **Examples:**
+  - Login with email and password  
+  - Fingerprint or Face ID (biometric authentication)  
+  - Two-factor authentication (2FA) using OTP, app, or hardware key  
+- **Goal:** Prove the user is legitimate before allowing access.
+
+---
+
+## Authorization
+- **Definition:** Determines what an authenticated user can access.  
+- **Purpose:** Checks if the user has permission to view or modify a resource.  
+- **Example:**
+  - Andre can access his own data but not Larry’s data.  
+- **Also Known As:** Access control.  
+- **Goal:** Enforce privileges after authentication.
+
+---
+
+## Key Difference
+| Concept | Meaning | Example |
+|----------|----------|----------|
+| Authentication | Confirms who you are | Logging in |
+| Authorization | Confirms what you can do | Viewing your own profile |
+
+---
+
+## HTTP Status Codes
+| Code | Meaning | When Used |
+|------|----------|------------|
+| **401 Unauthorized** | Actually means *Unauthenticated* | User not logged in |
+| **403 Forbidden** | Means *Unauthorized* | User logged in but lacks permission |
+
+---
+
+## Summary
+- **Authentication:** Verifies identity (login step).  
+- **Authorization:** Checks permissions (access control).  
+- Combined, these are often called **“Auth”** in web development.  
+- Secure apps must implement both correctly.
