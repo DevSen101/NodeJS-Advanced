@@ -1,0 +1,56 @@
+### 🧩 **What Are Sessions**
+
+* A **session** is a way for the **server to store data about the current active user**.
+* It helps the server remember user-related information between HTTP requests (since HTTP is stateless).
+
+---
+
+### 📦 **Purpose of Sessions**
+
+* Used to store **temporary data** about a user while they are using an app.
+* Keeps track of user’s **state** (e.g., logged in, items in cart, last page visited).
+
+---
+
+### ⚙️ **What Should Be Stored**
+
+* ✅ Sensitive or controlled data that the **client shouldn’t modify**:
+
+  * Example: user permissions, balance, roles, temporary access tokens.
+* ❌ Public or non-sensitive data (like username, theme preference) can stay on client side (e.g., localStorage).
+
+---
+
+### 🔒 **Why Sessions Exist**
+
+* Prevent users from **tampering** with important data (like bank balances).
+* Allow the server to maintain control over trusted information.
+
+---
+
+### 🕒 **Sessions vs Database**
+
+| Feature      | Sessions                        | Database               |
+| ------------ | ------------------------------- | ---------------------- |
+| **Purpose**  | Temporary user state            | Permanent data storage |
+| **Lifetime** | Until logout / browser closed   | Persists indefinitely  |
+| **Example**  | Current shopping cart           | Past order history     |
+| **Scope**    | Tied to a specific user/browser | Global and persistent  |
+
+---
+
+### 🛒 **Example**
+
+* When shopping online:
+
+  * Items in your **cart** → stored in **session** (temporary, per visit).
+  * Your **order history** → stored in **database** (permanent record).
+
+---
+
+### 💡 **Key Idea**
+
+* A **session** captures the temporary “state” of the user while interacting with your app.
+* When the session ends (logout, timeout, browser closed), that data usually disappears.
+
+---

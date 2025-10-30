@@ -1,0 +1,62 @@
+Here’s a **concise summary** (like quick notes) of the transcript you shared — explaining **cookies, authentication, and sessions** in simple, developer-friendly language 👇
+
+---
+
+### 🍪 **What Are Cookies**
+
+* **Cookies = small data strings stored in the browser** (usually set by the server).
+* Stored per **domain** and sometimes per **path**.
+* You can view them in Chrome DevTools → **Application → Cookies**.
+* Used mainly for **tracking**, **sessions**, and **authentication**.
+* Automatically sent by the browser to the server on every request to that domain.
+
+---
+
+### ⚙️ **Cookie Properties**
+
+* **`expires` / `max-age`** → defines how long the cookie lives.
+* **`secure`** → cookie sent **only over HTTPS**.
+* **`httpOnly`** → not accessible via JavaScript → prevents **XSS attacks**.
+* **`sameSite`** → limits cross-site requests (helps prevent **CSRF attacks**).
+
+---
+
+### 🔒 **Why `httpOnly` & `secure` Matter**
+
+* Protect cookies from malicious JS (Cross-Site Scripting).
+* Prevent attackers from stealing authentication data.
+* Example: If an attacker injects JS on a trusted site, `httpOnly` cookies cannot be read by that JS.
+
+---
+
+### 🔑 **Cookies vs Token-Based Authentication**
+
+#### 1️⃣ **Token-based (JWT)**
+
+* Server verifies credentials → returns **access token (JWT)**.
+* Browser stores token (localStorage or memory).
+* Each request must include token manually in the **Authorization header**.
+
+  ```
+  Authorization: Bearer <token>
+  ```
+* Developer must handle sending token manually.
+
+#### 2️⃣ **Cookie-based**
+
+* Server verifies credentials → returns **Set-Cookie** header in response.
+  Browser automatically stores cookie.
+* For every subsequent request → browser **automatically attaches** that cookie:
+
+  ```
+  Cookie: session_id=abc123
+  ```
+* Server identifies the user from that cookie’s value (e.g., session ID or access token).
+
+---
+
+### 💡 **Key Idea**
+
+* Both cookies and tokens are ways to **prove user identity** to the server.
+* Cookies are **automatically handled by browsers**, while tokens are **manually managed by code**.
+* Cookies often used with **sessions**, JWTs often used in **stateless APIs**.
