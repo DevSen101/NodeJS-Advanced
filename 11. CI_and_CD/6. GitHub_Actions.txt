@@ -1,0 +1,94 @@
+### 🧠 What You’re Learning
+
+#### 1. **GitHub Actions Overview**
+
+* GitHub Actions lets you **automate workflows** (like testing, building, or deploying your code).
+* These workflows are written in a `.yml` (YAML) file under `.github/workflows/`.
+* The CI (Continuous Integration) pipeline automatically runs whenever:
+
+  * You **push code** to GitHub.
+  * You **open or merge a pull request**.
+
+---
+
+#### 2. **Why Use GitHub Actions**
+
+* It’s **built into GitHub** — no extra setup like CircleCI or Travis CI.
+* It integrates with:
+
+  * **Pull requests**, **reviews**, and **branches**
+  * **Other GitHub features** (issues, discussions, etc.)
+* Supports **multiple OS platforms** (Linux, Windows, macOS).
+* Works with **any language** (Node.js, Python, Go, etc.).
+* Has **community-built actions** (e.g. `actions/checkout@v2`, `actions/setup-node@v3`, etc.).
+* It’s **free** for public repositories.
+
+---
+
+#### 3. **What a Workflow Looks Like**
+
+Example `.github/workflows/ci.yml` file:
+
+name: NASA Project CI                          # 👈 Name of the workflow (visible in GitHub Actions tab)
+
+on:                                            # 👈 Defines when this workflow should run
+  push:                                        # 👈 Runs when code is pushed to the repository
+    branches: [ main ]                         # 👈 Trigger only if push happens on the 'main' branch
+  pull_request:                                # 👈 Runs when a pull request targets the 'main' branch
+    branches: [ main ]                         # 👈 So CI runs for PRs before merging
+
+jobs:                                          # 👈 A workflow consists of one or more jobs
+  build:                                       # 👈 Job name (can be anything, here it's 'build')
+    runs-on: ubuntu-latest                     # 👈 The OS where the job runs (GitHub provides Ubuntu runners)
+
+    strategy:                                  # 👈 Defines a build matrix (run same job with different settings)
+      matrix:
+        node-version: [16, 18]                 # 👈 The job runs twice — once with Node.js 16, once with Node.js 18
+
+    steps:                                     # 👈 Each job has multiple steps that run sequentially
+      - name: Checkout code                    # 👈 Step 1: Checkout your repo into the runner
+        uses: actions/checkout@v3              # 👈 Uses prebuilt GitHub Action to clone repo
+
+      - name: Use Node.js ${{ matrix.node-version }}   # 👈 Step 2: Set Node.js version dynamically from the matrix
+        uses: actions/setup-node@v3            # 👈 Uses official GitHub Action to install Node.js
+        with:
+          node-version: ${{ matrix.node-version }}     # 👈 Version passed from matrix above (16 or 18)
+
+      - name: Install dependencies             # 👈 Step 3: Install all npm dependencies
+        run: npm install                       # 👈 Equivalent to running 'npm install' in your terminal
+
+      - name: Build client                     # 👈 Step 4: Build the React (client) part of the project
+        run: npm run build --prefix client     # 👈 Runs build command from client folder (for React app)
+
+---
+
+#### 4. **About “There Are No Workflow Runs Yet”**
+
+That means your workflow file hasn’t **been triggered yet**.
+👉 Do this:
+
+1. Commit and push your `.yml` file to your repo’s **default branch** (usually `main` or `master`).
+2. After pushing, check the **Actions tab** again — you should see it running.
+
+---
+
+#### 5. **If Your Branch Is `main` but Teacher Uses `master`**
+
+* Older repos use `master`; newer ones use `main`.
+* Run this to check your branch name:
+
+```bash
+git branch
+```
+
+If yours says `main`, keep using:
+
+```bash
+git push origin main
+```
+
+If it says `master`, then use:
+
+```bash
+git push origin master
+```
