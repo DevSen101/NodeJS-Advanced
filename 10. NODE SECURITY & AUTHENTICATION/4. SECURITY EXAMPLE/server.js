@@ -1,79 +1,97 @@
-const fs  = require('fs')
-const path = require('path')
-const https = require('https')
-const express = require('express')
-const helmet = require('helmet')
-require('dotenv').config()
-const passport = require('passport')
-const { Strategy } = require('passport-google-oauth20')
+const fs  = require('fs') // File system module for reading SSL key/cert
+const path = require('path') // For handling file paths
+const https = require('https') // HTTPS server module
+const express = require('express') // Express framework for web app
+const helmet = require('helmet') // Security middleware for HTTP headers
+require('dotenv').config() // Loads environment variables from .env file
+const passport = require('passport') // Authentication middleware
+const { Strategy } = require('passport-google-oauth20') // Google OAuth 2.0 strategy
 
+const PORT = 3000; // Server port
 
-const PORT = 3000;
-
+// Config object for Google OAuth credentials
 const config = {
  CLIENT_ID: process.env.CLIENT_ID,
  CLIENT_SECRET:process.env.CLIENT_SECRET
 }
 
+// OAuth options for Google strategy
 const AUTH_OPTIONS = {
  callbackUrl: '/auth/google/callback',
  clientID: config.CLIENT_ID,
  clientSecret: config.CLIENT_SECRET
 }
 
+// Verify callback executed after Google authentication
 function verifyCallback(accessToken, refreshToken, profile, done){
   console.log('Google profile', profile);
-  done(null, profile)
+  done(null, profile) // Pass user profile to Passport
 }
 
+// Register Google OAuth strategy with Passport
 passport.use(new Strategy(AUTH_OPTIONS, verifyCallback))
 
-const app = express();
+const app = express(); // Initialize Express app
 
-app.use(helmet());
-app.use(passport.initialize())
+app.use(helmet()); // Apply security best practices
+app.use(passport.initialize()) // Initialize Passport middleware
 
+// Middleware to check if user is logged in
 function checkLoggedIn(req, res, next){
- const isLoggedIn = true;
+ const isLoggedIn = true; // Placeholder: always true for now
  if(!isLoggedIn){
   res.status(401).json({
    error: 'You must log in!'
   })
  }
- next();
+ next(); // Continue if logged in
 }
 
+// Start Google OAuth flow
 app.get('/auth/google', 
  passport.authenticate('google', {
-  scope: ['email']
+  scope: ['email'] // Request access to user's email
  }));
 
+// Callback route after Google authentication
 app.get('/auth/google/callback',
   passport.authenticate('google',{
-   failureRedirect: '/failure',
-   successRedirect: '/',
-   session: false
+   failureRedirect: '/failure', // Redirect on failure
+   successRedirect: '/', // Redirect on success
+   session: false // Disable session storage
 }),
 (req, res) => {
  console.log('Google called us back!');
 });
 
+// Logout endpoint (not implemented yet)
 app.get('/auth/logout', (req, res) => {})
 
+// Protected route - only accessible if logged in
 app.get('/secret',checkLoggedIn, (req, res) => {
  res.send('Your secret key is gdfTo5JHfrKLGkF5 !')   
 })
 
+// Login failure route
 app.get('/failure', (req, res) => {
  res.send('Failed to log in!')
 })
+
+// Serve homepage
 app.get('/', (req, res) => {
  res.sendFile(path.join(__dirname, 'public', 'index.html'))
 })
 
+// Create HTTPS server with SSL cert and key
 https.createServer({
  key: fs.readFileSync('key.pem'),
  cert: fs.readFileSync('cert.pem'),
 }, app).listen(PORT, () => {
  console.log(`Listening on port ${PORT}`);
 })
+
+
+/**Sequence
+ * User → /auth/google → Google OAuth screen → User consents → Google redirects back to /auth/google/callback?code=...
+→ Passport exchanges code for tokens → verifyCallback() runs → successRedirect('/') or failureRedirect('/failure')
+ */
