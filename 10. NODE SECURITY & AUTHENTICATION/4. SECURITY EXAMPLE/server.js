@@ -6,13 +6,17 @@ const helmet = require('helmet') // Security middleware for HTTP headers
 require('dotenv').config() // Loads environment variables from .env file
 const passport = require('passport') // Authentication middleware
 const { Strategy } = require('passport-google-oauth20') // Google OAuth 2.0 strategy
+const cookieSession = require('cookie-session')
+const { verify } = require('crypto')
 
 const PORT = 3000; // Server port
 
 // Config object for Google OAuth credentials
 const config = {
  CLIENT_ID: process.env.CLIENT_ID,
- CLIENT_SECRET:process.env.CLIENT_SECRET
+ CLIENT_SECRET: process.env.CLIENT_SECRET,
+ COOKIE_KEY_1: process.env.COOKIE_KEY_1,
+ COOKIE_KEY_2: process.env.COOKIE_KEY_2,
 }
 
 // OAuth options for Google strategy
@@ -34,6 +38,13 @@ passport.use(new Strategy(AUTH_OPTIONS, verifyCallback))
 const app = express(); // Initialize Express app
 
 app.use(helmet()); // Apply security best practices
+
+app.use(cookieSession({
+  name: 'session',
+  maxAge: 24*60*60*1000,
+  keys: [config.COOKIE_KEY_1, config.COOKIE_KEY_2],
+
+}))
 app.use(passport.initialize()) // Initialize Passport middleware
 
 // Middleware to check if user is logged in
