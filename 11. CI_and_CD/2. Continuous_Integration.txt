@@ -1,0 +1,74 @@
+## 🧩 Topic: Continuous Integration (CI)
+
+### 1. What is Continuous Integration (CI)?
+
+* **Definition:**
+  Continuous Integration is a **software development best practice** where developers frequently merge (integrate) their code into a shared repository.
+* The goal is to **ensure that all code changes work together** and function across all developers’ environments — not just on individual machines.
+
+---
+
+### 2. How CI Works
+
+1. Developers write and test code locally.
+2. They **commit** and **push** code to a **shared repository** (e.g., GitHub).
+3. A **CI server** automatically:
+
+   * Detects new commits.
+   * Builds the code (if needed).
+   * Runs automated tests (unit, API, security, linting).
+   * Reports results (✅ pass / ❌ fail).
+
+If tests fail, the developer fixes issues and commits again until everything passes.
+
+---
+
+### 3. Example Scenario
+
+* **Developers:** Amy and Rory working on an airline project.
+* They both commit small changes frequently.
+* The **CI server** ensures that:
+
+  * Code works on all machines (not just locally).
+  * Tests run automatically after each commit.
+  * The team always has a working version of the codebase.
+
+---
+
+### 4. Benefits of CI
+
+* Detects errors early with quick feedback (red/green status).
+* Reduces debugging time and improves code quality.
+* Makes collaboration between developers smooth.
+* Prevents integration issues at the end of a project.
+* Allows developers to focus on **new features** instead of fixing old bugs.
+
+---
+
+### 5. CI Tools
+
+Popular CI tools used today:
+
+* **GitHub Actions** → built into GitHub.
+* **CircleCI** → simple and widely used.
+* **Travis CI** → similar to CircleCI.
+* **Jenkins** → open-source and popular in large enterprises.
+
+---
+
+### 6. CI in Agile & Extreme Programming
+
+* **Agile Development:** Promotes fast, iterative software releases.
+* **Extreme Programming (XP):**
+
+  * Emphasizes **continuous testing and integration**.
+  * Encourages **many small releases per day** instead of monthly or yearly.
+* CI became popular due to these Agile practices.
+
+---
+
+### 7. Key Takeaway
+
+> Continuous Integration ensures that code is **always in a working state**, enabling faster, more reliable software delivery and teamwork.
+
+---
