@@ -1,0 +1,73 @@
+### 🔹 **What is a Session?**
+
+A session is a way for a web application to remember information about a user across multiple requests.
+Since HTTP is stateless (it doesn’t remember anything between requests), sessions help track users who have logged in or are performing actions in sequence.
+
+---
+
+### 🔹 **How Sessions Work**
+
+1. A user logs in or performs an action that requires identification.
+2. The server creates a session — temporary data that stores information like the user’s ID or login status.
+3. The server then sends an identifier (usually inside a cookie) back to the browser.
+4. The browser automatically includes that cookie in every future request to the same server.
+5. The server reads the cookie to know *which user* is making the request and retrieves or verifies their session data.
+
+---
+
+### 🔹 **Types of Sessions**
+
+#### 1. **Server-side sessions (Stateful)**
+
+* The session data is stored on the **server** (in a database or memory).
+* The browser only keeps a small **session ID** cookie that points to this stored session.
+* Each time the user sends a request, the server looks up the session in its database using that ID.
+* This means the server maintains “state” for each user.
+* Drawback: harder to scale because the session data must exist on every server or be shared through a database.
+
+---
+
+#### 2. **Client-side sessions (Stateless)**
+
+* The entire session data is stored in the **browser’s cookie** instead of a database.
+* The server signs or encrypts the cookie using a secret key so it can’t be modified by the user.
+* On each request, the cookie is sent back to the server.
+* The server verifies the signature to confirm the data hasn’t been tampered with.
+* No database lookup is needed, making it easier to scale.
+* However, cookie size is limited (usually up to 4KB).
+
+---
+
+### 🔹 **Cookies and Authentication**
+
+* Cookies act as the mechanism that stores and sends session data automatically.
+* When a user logs in successfully:
+
+  * The server sets a cookie in the user’s browser.
+  * That cookie identifies the session or contains user info (depending on type).
+  * The browser sends this cookie automatically with each subsequent request.
+* When the user logs out, the cookie is deleted or invalidated.
+
+---
+
+### 🔹 **Callback Execution (in OAuth or External Login)**
+
+1. The user tries to log in through an external service (like Google or GitHub).
+2. The client (your app) sends the **client ID** and **redirect URI** to that provider.
+3. After authentication, the provider sends the user back to your app’s **callback URL** with an **authorization code**.
+4. Your server exchanges that code for an **access token**.
+5. The server then creates a **session** for the user and sets a **cookie**.
+6. From this point, all requests use the session or token for authentication — no need to log in again.
+
+---
+
+### 🔹 **When Callbacks and Responses Happen**
+
+* Callback is triggered **after** the authentication provider validates the user.
+* Server receives the response (auth code or token).
+* Then server executes its callback function to:
+
+  * Verify the code/token.
+  * Create a session.
+  * Set the cookie or token in the browser.
+* From then on, requests automatically include the cookie, allowing session continuity.
