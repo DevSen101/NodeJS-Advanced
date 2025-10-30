@@ -88,8 +88,13 @@ app.get('/auth/google/callback',
  console.log('Google called us back!');
 });
 
-// Logout endpoint (not implemented yet)
-app.get('/auth/logout', (req, res) => {})
+// Logout endpoint (fixed for Passport v0.6+)
+app.get('/auth/logout', (req, res, next) => {
+  req.logout(function (err) {
+    if (err) { return next(err); } // Handle any logout errors
+    return res.redirect('/'); // Redirect to home after logout
+  });
+});
 
 // Protected route - only accessible if logged in
 app.get('/secret',checkLoggedIn, (req, res) => {
