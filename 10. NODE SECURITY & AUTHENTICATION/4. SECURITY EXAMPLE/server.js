@@ -21,7 +21,7 @@ const config = {
 
 // OAuth options for Google strategy
 const AUTH_OPTIONS = {
- callbackUrl: '/auth/google/callback',
+ callbackURL: '/auth/google/callback',
  clientID: config.CLIENT_ID,
  clientSecret: config.CLIENT_SECRET
 }
@@ -35,6 +35,16 @@ function verifyCallback(accessToken, refreshToken, profile, done){
 // Register Google OAuth strategy with Passport
 passport.use(new Strategy(AUTH_OPTIONS, verifyCallback))
 
+// Save the session to the cookie
+passport.serializeUser((user, done) => {
+  done(null, user);
+})
+
+// Read the session from the cookie
+passport.deserializeUser((obj, done) => {
+  done(obj, done);
+})
+
 const app = express(); // Initialize Express app
 
 app.use(helmet()); // Apply security best practices
@@ -45,10 +55,12 @@ app.use(cookieSession({
   keys: [config.COOKIE_KEY_1, config.COOKIE_KEY_2],
 
 }))
+
 app.use(passport.initialize()) // Initialize Passport middleware
+app.use(passport.session())
 
 // Middleware to check if user is logged in
-function checkLoggedIn(req, res, next){
+function checkLoggedIn(req, res, next){  //req.user
  const isLoggedIn = true; // Placeholder: always true for now
  if(!isLoggedIn){
   res.status(401).json({
@@ -69,7 +81,7 @@ app.get('/auth/google/callback',
   passport.authenticate('google',{
    failureRedirect: '/failure', // Redirect on failure
    successRedirect: '/', // Redirect on success
-   session: false // Disable session storage
+   session: true // Enable session storage
 }),
 (req, res) => {
  console.log('Google called us back!');
