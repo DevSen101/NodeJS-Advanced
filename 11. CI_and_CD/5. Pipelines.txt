@@ -1,0 +1,76 @@
+## 🧩 **CI/CD Pipeline**
+
+### **Definition**
+
+A **CI/CD pipeline** is a sequence of automated steps that take your code from **development to production**.
+It includes everything from **building, testing, and deploying** your application automatically whenever new code is pushed.
+
+---
+
+### **Explanation**
+
+* Whenever a developer pushes code to a repository (like GitHub), the **CI/CD server** (e.g., Jenkins, GitLab CI, GitHub Actions) starts executing a series of automated steps.
+* These steps are collectively known as the **pipeline**.
+
+The pipeline may include:
+
+1. **Build Step:**
+   The CI server compiles or builds the project.
+   Example — compiling a Java project or building a Docker image.
+
+2. **Test Step:**
+   Automated tests run to check that the new code doesn’t break existing functionality.
+   There are different types of tests:
+
+   * **Smoke tests:** Basic checks to catch obvious issues.
+   * **Unit tests:** Test small modules or functions individually.
+   * **Integration tests:** Ensure different parts of the application work well together.
+
+3. **Deploy Step:**
+   If all tests pass, the pipeline may automatically deploy the code.
+   This could be to a **staging environment** (for testing) or **production environment** (for users).
+
+---
+
+### **Example**
+
+Imagine a **food delivery app**:
+
+1. A developer adds a new feature — “Track order in real time” — and pushes it to GitHub.
+2. The CI/CD pipeline starts automatically:
+
+   * **Builds** the app.
+   * **Runs unit and integration tests.**
+   * **Builds a Docker container** for deployment.
+   * **Deploys the app** to the staging server for final testing.
+3. After review, the code is automatically **deployed to production**, and users instantly see the new feature.
+
+---
+
+### **Staging vs Production**
+
+* **Staging Environment:**
+  A pre-production environment that mimics production. Used to test before public release.
+* **Production Environment:**
+  The live environment used by actual users.
+
+Some teams do:
+
+* Continuous Deployment → **staging only** (manual release to production).
+* Others do → Continuous Deployment → **directly to production.**
+
+---
+
+### **Benefits**
+
+1. Faster delivery of features and bug fixes.
+2. Early detection of issues through automated testing.
+3. Consistent, repeatable deployment process.
+4. Reduced human error and manual work.
+5. Easier collaboration among developers.
+
+---
+
+### **In Short**
+
+> The CI/CD pipeline automates **building, testing, and deploying** applications — ensuring faster, safer, and more reliable software releases.
