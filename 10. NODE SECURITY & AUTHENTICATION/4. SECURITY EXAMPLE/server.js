@@ -37,12 +37,12 @@ passport.use(new Strategy(AUTH_OPTIONS, verifyCallback))
 
 // Save the session to the cookie
 passport.serializeUser((user, done) => {
-  done(null, user);
+  done(null, user.id);
 })
 
 // Read the session from the cookie
-passport.deserializeUser((obj, done) => {
-  done(obj, done);
+passport.deserializeUser((id, done) => {
+  done(null, id);
 })
 
 const app = express(); // Initialize Express app
@@ -61,7 +61,8 @@ app.use(passport.session())
 
 // Middleware to check if user is logged in
 function checkLoggedIn(req, res, next){  //req.user
- const isLoggedIn = true; // Placeholder: always true for now
+  console.log('Current user is:', req.user);
+ const isLoggedIn = req.isAuthenticated() && req.user; // Placeholder: always true for now
  if(!isLoggedIn){
   res.status(401).json({
    error: 'You must log in!'
@@ -92,7 +93,7 @@ app.get('/auth/logout', (req, res) => {})
 
 // Protected route - only accessible if logged in
 app.get('/secret',checkLoggedIn, (req, res) => {
- res.send('Your secret key is gdfTo5JHfrKLGkF5 !')   
+ res.send('Your secret key is gdfTo5JHf6rKL9GkF5 !')   
 })
 
 // Login failure route
