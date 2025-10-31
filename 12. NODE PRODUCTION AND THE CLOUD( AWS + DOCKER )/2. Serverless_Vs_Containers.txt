@@ -1,0 +1,100 @@
+## ☁️ Deploying Backend to the Cloud
+
+When deploying a backend API to the cloud, there are **two main approaches**:
+
+---
+
+### **1. Serverless Approach**
+
+#### **Definition**
+
+* Serverless doesn’t mean there are *no servers* — it means the **cloud provider manages the servers** for you.
+* Developers only focus on the **code** — when it runs, and what it does.
+
+#### **Key Idea**
+
+* You don’t manage the operating system or server configuration.
+* The cloud automatically scales and runs your code when needed.
+
+#### **Example**
+
+* **AWS Lambda Functions** — your code runs **on-demand** when triggered by an event:
+
+  * A file upload
+  * An email sent
+  * An API request
+
+#### **Advantages**
+
+| Benefit                  | Description                                |
+| ------------------------ | ------------------------------------------ |
+| **No server management** | Cloud provider handles setup and scaling.  |
+| **Cost-effective**       | You pay only for execution time.           |
+| **Automatic scaling**    | Functions scale automatically with demand. |
+
+#### **Limitations**
+
+| Issue                    | Description                                                   |
+| ------------------------ | ------------------------------------------------------------- |
+| **Latency (Cold Start)** | If a function is idle, it “sleeps” and takes time to restart. |
+| **Vendor Lock-in**       | Tied to one cloud provider (e.g., AWS Lambda).                |
+| **Limited control**      | Can’t deploy on your own physical servers.                    |
+
+#### **Mitigation Tools**
+
+* **Serverless Framework**: A tool that helps deploy serverless apps across **AWS**, **Azure**, and **GCP** using a single setup.
+
+---
+
+### **2. Containerized Approach (Using Docker)**
+
+#### **Definition**
+
+* Containers package your **application code**, **dependencies**, and **environment** into one unit.
+* These units can run anywhere — on your machine, on a server, or in the cloud.
+
+#### **About Docker**
+
+* **Docker** was released in **2014** and became the **standard tool** for containerization.
+* It makes applications portable, reproducible, and easy to share.
+
+#### **Advantages**
+
+| Benefit         | Description                                          |
+| --------------- | ---------------------------------------------------- |
+| **Portability** | Runs anywhere — local, cloud, or on-premises.        |
+| **Consistency** | Works the same in all environments.                  |
+| **Isolation**   | Each container has its own environment.              |
+| **Scalability** | Works well with orchestration tools like Kubernetes. |
+
+#### **Example**
+
+You can build your Node.js API into a Docker container and deploy it on:
+
+* AWS ECS / EKS
+* Google Cloud Run
+* Azure Container Apps
+
+---
+
+### **3. Summary Table**
+
+| Feature          | Serverless                | Containerized (Docker)       |
+| ---------------- | ------------------------- | ---------------------------- |
+| **Managed by**   | Cloud provider            | Developer                    |
+| **Startup time** | May have cold start delay | Immediate                    |
+| **Portability**  | Limited (vendor-specific) | High                         |
+| **Control**      | Low                       | High                         |
+| **Cost model**   | Pay-per-use               | Pay for running instances    |
+| **Use case**     | Event-driven tasks        | Long-running or complex apps |
+
+---
+
+### **4. Conclusion**
+
+Both **Serverless** and **Docker** are modern ways to deploy applications:
+
+* Serverless = simple and managed
+* Docker = flexible and portable
+
+For larger production apps like the **NASA Mission Control Project**, **Docker** is the more practical and scalable approach.
