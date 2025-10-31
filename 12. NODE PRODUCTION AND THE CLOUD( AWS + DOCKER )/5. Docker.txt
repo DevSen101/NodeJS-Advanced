@@ -1,0 +1,226 @@
+# 📘 Docker Notes (Merged Summary)
+
+## 1. Installing Docker
+
+* Go to [Docker.com](https://www.docker.com) → click **Getting Started**.
+
+* Docker is available for Windows, macOS, and Linux.
+
+* Download **Docker Desktop** for Mac or Windows — it includes:
+
+  * The Docker CLI (command-line tool)
+  * Docker Compose
+  * A graphical dashboard
+
+* For **Linux**, Docker Desktop isn’t available. You must install **Docker Engine** manually depending on your distribution (e.g., Ubuntu).
+
+### Installation Process
+
+* Download and run the installer.
+* Follow on-screen instructions to install Docker Desktop.
+* Once installed, open Docker Desktop and wait for it to start.
+* Verify installation by opening a terminal and typing:
+
+  ```bash
+  docker
+  ```
+* This shows available Docker commands — confirming Docker is ready.
+
+---
+
+## 2. Creating the First Docker Container
+
+### Understanding Docker Hub
+
+* **Docker Hub** is a cloud-based image repository.
+* It hosts **Docker images**, which are snapshots of files, dependencies, and applications.
+* Containers run these images.
+* Images are **immutable** — they never change. To update, create a new image.
+
+### Image vs. Container
+
+* **Image:** The blueprint (code + dependencies)
+* **Container:** A running instance of that image
+
+### Using Docker Hub
+
+* Access: [hub.docker.com](https://hub.docker.com)
+* Contains official images for:
+
+  * Node.js
+  * MongoDB
+  * PostgreSQL
+  * Ubuntu, etc.
+* Docker Hub is free and easy to use.
+
+### Running a Container
+
+Example: Run Docker’s “Hello World” app using the **Getting Started** image.
+
+```bash
+docker run -p 80:80 docker/getting-started
+```
+
+Explanation:
+
+* `docker run`: Creates and starts a container.
+* `-p 80:80`: Maps port 80 inside the container to port 80 on your computer.
+* If the image isn’t found locally, Docker pulls it from Docker Hub.
+
+Visit [http://localhost](http://localhost) → You’ll see the Getting Started page.
+
+✅ **Congratulations — you just created your first Docker container!**
+
+---
+
+## 3. Docker Hub Setup
+
+* You can also **push your own images** to Docker Hub for free.
+* Create an account at [hub.docker.com/signup](https://hub.docker.com/signup).
+* After signup, you can have:
+
+  * **Public images** → shared with everyone.
+  * **Private images** → visible only to you.
+
+### Login from Terminal
+
+```bash
+docker login
+```
+
+Enter your **Docker ID** and **password** when prompted.
+
+Once logged in, you can push or pull your own images.
+
+---
+
+## 4. Building Docker Images (Node.js Example)
+
+We’ll build a Docker image for our Node.js application (e.g., NASA Project).
+
+### Step 1: Create a Dockerfile
+
+Create a file named **Dockerfile** in your project root.
+This file defines all setup instructions for your image.
+
+Example:
+
+```dockerfile
+# Base image
+FROM node:18-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy files from local system to container
+COPY . .
+
+# Install dependencies (production only)
+RUN npm install --only=production
+
+# Expose port (example: 3000)
+EXPOSE 3000
+
+# Start the app
+CMD ["npm", "start"]
+```
+
+### Step 2: Understanding Dockerfile Commands
+
+* **FROM:** Base image (Node, Ubuntu, etc.)
+* **WORKDIR:** Directory inside the container for app files
+* **COPY:** Copies files from your local project to container
+* **RUN:** Executes commands inside container (like `npm install`)
+* **EXPOSE:** Declares which port the app will use
+* **CMD:** Command that runs when the container starts
+
+---
+
+## 5. Choosing the Right Base Image
+
+* Docker images come in multiple variants:
+
+  * **Regular**: Full-featured (~300MB)
+  * **Slim**: Lighter (~60MB)
+  * **Alpine**: Minimal (~30MB)
+
+* **Alpine Linux** is preferred because:
+
+  * Very lightweight (≈5MB base)
+  * Faster to download
+  * Ideal for production use
+
+Example:
+
+```dockerfile
+FROM node:lts-alpine
+```
+
+---
+
+## 6. Working Directory & Copying Files
+
+* The `WORKDIR /app` command defines where all actions occur.
+* Example of copying source code:
+
+  ```dockerfile
+  COPY . .
+  ```
+
+  This copies files from your local project folder into the `/app` folder in the container.
+
+---
+
+## 7. Installing Dependencies
+
+* Use `RUN npm install --only=production` to install only necessary dependencies.
+* This ensures a smaller, optimized image for deployment.
+
+---
+
+## 8. Running the Application
+
+After building your image, you can run it as a container:
+
+### Build the image
+
+```bash
+docker build -t nasa-app .
+```
+
+### Run the container
+
+```bash
+docker run -p 3000:3000 nasa-app
+```
+
+Then open your browser and go to [http://localhost:3000](http://localhost:3000).
+
+---
+
+## 9. Summary of Key Commands
+
+| Command                                    | Description                    |
+| ------------------------------------------ | ------------------------------ |
+| `docker --version`                         | Check Docker installation      |
+| `docker build -t <name> .`                 | Build image from Dockerfile    |
+| `docker run -p <local>:<container> <name>` | Run a container                |
+| `docker ps`                                | List running containers        |
+| `docker stop <container_id>`               | Stop a running container       |
+| `docker images`                            | List all images                |
+| `docker login`                             | Log into Docker Hub            |
+| `docker push <name>`                       | Upload image to Docker Hub     |
+| `docker pull <name>`                       | Download image from Docker Hub |
+
+---
+
+## 10. Conclusion
+
+You’ve learned:
+
+* How to install Docker and verify it.
+* How to run your first container using an official image.
+* How to set up Docker Hub and log in.
+* How to build custom Docker images using a **Dockerfile**.
+* How to use lightweight **Alpine** images for Node.js.
+* How to run and manage your containers locally.
