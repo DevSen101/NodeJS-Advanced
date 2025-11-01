@@ -1,0 +1,67 @@
+# GraphQL Introduction Notes
+
+## What is GraphQL
+
+* GraphQL is a modern way of building backends and frontends and working with data.
+* It provides a different way of querying servers for data compared to REST APIs.
+* GraphQL defines how frontends communicate with backend APIs.
+* It is both a specification and a **query language** for APIs.
+
+## Core Idea
+
+* GraphQL allows you to focus on data and how different pieces of data relate to each other.
+* You start by describing your data using a **schema**.
+* The schema defines types and relationships using GraphQL’s own **type system**.
+
+## Example Schema
+
+* Suppose an API serves open-source project data.
+* A project has:
+
+  * name (String)
+  * tagline (String)
+  * contributors (List of Users)
+* A User is another object type with its own properties.
+* Since GraphQL works with many languages, it defines its own type system (not relying on TypeScript or Java types).
+* GraphQL ensures data has the correct shape using JSON-like syntax.
+
+## Queries
+
+* Once a schema is defined, you can create **queries**.
+* GraphQL queries look like JavaScript object structures.
+* Example: request a specific project’s tagline by passing a name argument.
+* Queries select specific fields (e.g., tagline) from an object (e.g., project).
+* The result matches the query shape exactly in JSON format.
+
+## Benefits
+
+* Predictable results: The shape of the query matches the shape of the response.
+* You get exactly the fields you request, nothing more.
+* No need to know backend storage details.
+
+## Why GraphQL
+
+* Traditional REST APIs use multiple endpoints for different resources.
+* Each endpoint corresponds to actions (GET, POST, PUT, DELETE).
+* GraphQL simplifies this with **a single endpoint**.
+* All data requests go through one endpoint (commonly `/graphql`).
+
+## How It Works
+
+* The frontend sends a POST request containing a GraphQL query in the body.
+* Alternatively, a GET request can be used with the query in the URL string.
+* Both methods are allowed.
+
+## Advantages Over REST
+
+* Only one request is needed to fetch related data instead of multiple REST calls.
+* Applications become faster and more efficient.
+* Backends become simpler to query.
+* Reduces over-fetching and under-fetching issues common in REST.
+
+## Summary
+
+* GraphQL is a query language for APIs.
+* It was developed by Facebook to improve data fetching for complex applications.
+* It changes how developers build and interact with APIs.
+* We will compare GraphQL and REST in detail and write practical GraphQL queries next.
