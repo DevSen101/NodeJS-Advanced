@@ -1,0 +1,22 @@
+# ==============================
+# Common Node.js ignores
+# ==============================
+
+# Ignore all node_modules folders (no matter where they are)
+**/node_modules/
+
+# Ignore all log files
+**/*.log
+
+# Ignore environment files
+**/.env
+
+# Ignore build folders (frontend builds)
+**/build/
+
+# Ignore coverage or test output
+**/coverage/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
