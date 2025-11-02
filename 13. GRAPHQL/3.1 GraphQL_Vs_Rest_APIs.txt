@@ -1,0 +1,82 @@
+# 📘 GraphQL vs REST — Summary Notes
+
+## 🔹 REST API Overview
+
+* **Stateless:** Easy to scale and cluster servers.
+* **Named Endpoints:** Each resource has its own URL (like `/users`, `/products`).
+* **HTTP-based:** Closely follows standard web protocols.
+* **Easy Caching:** Responses are predictable (same URL → same response).
+
+---
+
+## 🔹 GraphQL Overview
+
+* **Single Endpoint:** All data comes from one endpoint (e.g., `/graphql`).
+* **Flexible Queries:** Client requests exactly what it needs → no over-fetching or under-fetching.
+* **Schemas and Types:**
+
+  * *Schemas* describe available data and structure.
+  * *Types* ensure data validity (e.g., `String`, `Int`).
+* **Database-Like Querying:** Frontend can query backend like a database.
+* **Faster Development:** Frontend teams don’t wait for new backend endpoints — just update queries.
+
+---
+
+## 🔹 Example: Star Wars API Tool
+
+GraphQL provides an interactive **GraphiQL tool** (or Apollo Sandbox) for testing queries.
+You can explore data like:
+
+```graphql
+{
+  allStarships {
+    name
+    model
+  }
+}
+```
+
+Each object (e.g., Starship, Droid, Friends) has a unique `id`, which helps in **caching and referencing**.
+
+---
+
+## 🔹 Advantages of GraphQL
+
+1. **Single Request:** Fetch multiple related data in one query.
+2. **No Over/Under Fetching:** Get only required fields.
+3. **Strongly Typed Schema:** Predictable data structure.
+4. **Faster Development:** Less waiting between frontend and backend teams.
+5. **Active Community:** Tools like Apollo, GraphiQL, Relay, etc.
+
+---
+
+## 🔹 Disadvantages of GraphQL
+
+1. **Complexity:** Developers must learn GraphQL syntax and schema setup.
+2. **Difficult Caching:** Since URLs don’t define responses, caching requires inspecting queries or IDs.
+3. **Initial Setup Time:** Defining schemas/types can be time-consuming for small apps.
+4. **Not RESTful:** Many existing tools/libraries built for REST don’t directly support GraphQL.
+
+---
+
+## 🔹 REST + GraphQL Together
+
+* They can **coexist** in the same project.
+* Common pattern:
+
+  * Use **REST** for simple operations like authentication or file uploads.
+  * Use **GraphQL** for flexible, complex data queries.
+* Migration can be done **gradually** — add GraphQL endpoint while keeping REST routes.
+
+---
+
+## 🔹 Summary
+
+| Aspect        | REST                         | GraphQL                    |
+| ------------- | ---------------------------- | -------------------------- |
+| Endpoint      | Multiple                     | Single                     |
+| Data Fetching | Over/Under fetching possible | Exact data fetched         |
+| Caching       | Easy                         | Complex                    |
+| Schema        | Implicit                     | Strongly typed             |
+| Setup         | Simple                       | Complex                    |
+| Use Case      | Simple APIs                  | Complex data relationships |

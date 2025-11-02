@@ -1,0 +1,88 @@
+### GraphQL Basics – Writing Your First Query
+
+* **GraphQL** is a query language for APIs that allows clients to request exactly the data they need and nothing more.
+* It solves over-fetching and under-fetching problems common in REST APIs.
+
+---
+
+### Structure of a Query
+
+* A **GraphQL query** has a predictable structure:
+
+  ```graphql
+  {
+    typeName {
+      field1
+      field2
+    }
+  }
+  ```
+* You specify which **type** you want to fetch (for example, `books`) and which **fields** you want (for example, `title`, `author`).
+
+---
+
+### Example Query
+
+```graphql
+{
+  books {
+    title
+    author
+  }
+}
+```
+
+* This query asks for all books and only returns the title and author fields.
+* The response will look like the query shape:
+
+```json
+{
+  "data": {
+    "books": [
+      {
+        "title": "Clean Code",
+        "author": "Robert C. Martin"
+      },
+      {
+        "title": "The Pragmatic Programmer",
+        "author": "Andrew Hunt"
+      }
+    ]
+  }
+}
+```
+
+---
+
+### Fetching Multiple Data Types
+
+* You can request multiple data types in the same query:
+
+  ```graphql
+  {
+    books {
+      title
+      author
+    }
+    authors {
+      name
+      nationality
+    }
+  }
+  ```
+* The server will return both datasets in one round trip.
+
+https://swapi-graphql.netlify.app/.netlify/functions/index
+
+You can try GraphQL queries using online tools such as the Star Wars GraphQL API (based on SWAPI).
+
+
+---
+
+### Key Points
+
+* Every GraphQL query must begin with `{}` to represent the root.
+* The fields you select determine what data is returned — no extra data is sent.
+* GraphQL responses mirror the structure of the query.
+* You can explore and test queries using tools like **GraphiQL** or **Apollo Sandbox**.
+* Each field in a GraphQL query corresponds to a function (resolver) on the server.

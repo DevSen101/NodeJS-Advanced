@@ -1,0 +1,71 @@
+### GraphQL vs REST – Why GraphQL Is Better
+
+#### Overview
+
+* GraphQL solves key problems faced by REST APIs.
+* Instead of multiple endpoints, GraphQL uses **one single endpoint** to fetch all required data.
+* It removes two common issues: **over-fetching** and **under-fetching**.
+
+---
+
+### Over-fetching and Under-fetching
+
+* **Over-fetching** → getting more data than needed.
+  Example: you just need the number of cart items, but REST returns full product details.
+* **Under-fetching** → needing to make multiple requests to get all required data.
+  Example: product details, reviews, and cart summary require three separate requests.
+
+---
+
+### Example: E-commerce Application (REST Approach)
+
+* Building an online store like Amazon involves multiple endpoints:
+
+  * `/products` → list or search products
+  * `/products/:id` → product details
+  * `/reviews/:productId` → product reviews
+  * `/cart` → get, add, or remove items
+  * `/orders` → create or view orders
+* To show one product page (e.g., shoes):
+
+  * Request product details
+  * Request reviews
+  * Request cart summary
+* → That’s **three server trips**, slowing load time and wasting bandwidth.
+* Each request may also contain unneeded data (over-fetching).
+
+---
+
+### How GraphQL Solves This
+
+* GraphQL allows a **single request** to ask for exactly the needed data.
+* The client sends a query describing all data requirements.
+* The GraphQL server collects all required information through **resolvers** (functions) and returns a single, shaped response.
+* No redundant data → no over-fetching.
+* No multiple requests → no under-fetching.
+
+---
+
+### Benefits
+
+* **Faster** page loads — fewer round trips.
+* **Efficient** bandwidth usage — only necessary fields returned.
+* **Simpler frontend logic** — one endpoint for all data needs.
+* **Flexible** — frontend controls what data it gets, independent of backend structure.
+
+---
+
+### Trade-offs
+
+* GraphQL introduces extra **complexity** in setup and query handling.
+* For small apps, REST may be simpler.
+* For large applications with many data relationships, GraphQL provides major performance and flexibility advantages.
+
+---
+
+### Key Point
+
+> Frontend developers care about data, not endpoints.
+> GraphQL lets them request **only what’s needed** — nothing more, nothing less.
+
+---
