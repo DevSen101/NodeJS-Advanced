@@ -24,7 +24,7 @@ const app = express()
 app.use('/graphql', graphqlHTTP({
  schema: schema,     // Attach schema
  rootValue: root,    // Attach resolver
- // graphiql: true   // (Optional) Enable GraphiQL UI
+ graphiql: true   // (Optional) Enable GraphiQL UI
 }))
 
 // Start server on port 3000
