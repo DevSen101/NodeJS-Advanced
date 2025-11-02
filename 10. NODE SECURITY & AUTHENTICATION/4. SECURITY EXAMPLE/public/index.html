@@ -1,14 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Document</title>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <title>Google OAuth Practice</title>
+ <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
- <b>Hello</b> Here is yout secret:
- <a href="/secret">Show Me the secret code</a> <!--anybody can go to /secret endpoint.  let's make it private so that only authenticated person can see -->
- <a href="/auth/google">Google login</a>
- <a href="/auth/logout">Sign out</a>
+ <div class="container">
+  <h1>Welcome 👋</h1>
+  <p>Hello! Here is your secret page access:</p>
+  <div class="links">
+   <a href="/secret" class="btn">Show Secret Code</a>
+   <a href="/auth/google" class="btn google">Login with Google</a>
+   <a href="/auth/logout" class="btn logout">Logout</a>
+  </div>
+ </div>
 </body>
+
 </html>

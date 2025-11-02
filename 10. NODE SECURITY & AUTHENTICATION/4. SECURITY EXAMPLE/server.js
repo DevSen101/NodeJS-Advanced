@@ -73,8 +73,12 @@ app.use((req, res, next) => {
 });
 
 
-app.use(passport.initialize()) // Initialize Passport middleware
-app.use(passport.session())
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Serve static files like index.html, CSS, images, etc.
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 // Middleware to check if user is logged in
 function checkLoggedIn(req, res, next){  //req.user
