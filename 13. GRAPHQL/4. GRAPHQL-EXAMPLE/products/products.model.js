@@ -22,7 +22,14 @@ const products =  [
   })
  }
 
+ function getProductsById(id) {
+  return products.find((product) => {
+   return product.id ===id;
+  })
+ }
+
  module.exports = {
   getAllProducts,
-  getProductsByPrice
+  getProductsByPrice,
+  getProductsById 
  }
