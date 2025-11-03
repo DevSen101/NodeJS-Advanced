@@ -1,45 +1,38 @@
-// Import required modules
+// ✅ Import required modules
 const path = require('path')
 const express = require('express')
 
-const { ApolloServer } = require('apollo-server-express')
-const { loadFilesSync } = require('@graphql-tools/load-files')
-const { makeExecutableSchema } = require('@graphql-tools/schema')
+const { ApolloServer } = require('apollo-server-express') // Apollo server for Express
+const { loadFilesSync } = require('@graphql-tools/load-files') // Load .graphql & resolver files
+const { makeExecutableSchema } = require('@graphql-tools/schema') // Combine typeDefs & resolvers
 
-
+// ✅ Load schema and resolvers from files
 const typesArray = loadFilesSync('**/*', {
-extensions: ['.graphql']  
+  extensions: ['.graphql'] // Load all .graphql schema files
 })
-const resolversArray = loadFilesSync(path.join(__dirname, '**/*.resolvers.js'))
+const resolversArray = loadFilesSync(path.join(__dirname, '**/*.resolvers.js')) // Load all resolvers
 
+// ✅ Start Apollo Server (async function)
 async function startApolloServer() {
- // Initialize Express app
-const app = express()
+  const app = express() // Initialize Express app
 
-// Define GraphQL schema with Query type
-const schema = makeExecutableSchema({
-  typeDefs: typesArray,
-  resolvers: resolversArray
-})
+  // Create executable GraphQL schema
+  const schema = makeExecutableSchema({
+    typeDefs: typesArray,
+    resolvers: resolversArray
+  })
 
-const server = new ApolloServer({
-  schema
-})
+  // Create Apollo Server with schema
+  const server = new ApolloServer({ schema })
 
-await server.start();
-server.applyMiddleware({ app, path: '/graphql'})
+  await server.start() // Start Apollo Server
+  server.applyMiddleware({ app, path: '/graphql' }) // Apply middleware at /graphql endpoint
 
-// Start server on port 3000
-app.listen(3000, () => {
- console.log('GraphQL Server Running...')
- })
+  // Start Express server
+  app.listen(3000, () => {
+    console.log('🚀 GraphQL Server Running on http://localhost:3000/graphql')
+  })
 }
 
-startApolloServer();
-
- 
-
-
-
-
-
+// ✅ Call server start function
+startApolloServer()
