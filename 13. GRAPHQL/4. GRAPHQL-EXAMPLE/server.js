@@ -1,8 +1,8 @@
 // Import required modules
 const path = require('path')
 const express = require('express')
-const { graphqlHTTP } = require('express-graphql')
 
+const { graphqlHTTP } = require('express-graphql')
 const { loadFilesSync } = require('@graphql-tools/load-files')
 const { makeExecutableSchema } = require('@graphql-tools/schema')
 
@@ -11,16 +11,13 @@ const typesArray = loadFilesSync('**/*', {
 extensions: ['.graphql']  
 })
 
+const resolversArray = loadFilesSync(path.join(__dirname, '**/*.resolvers.js'))
+
 // Define GraphQL schema with Query type
 const schema = makeExecutableSchema({
-  typeDefs: typesArray
+  typeDefs: typesArray,
+  resolvers: resolversArray
 }) 
-
-// Define root resolver (provides data for schema fields)
-const root = {
-  products: require('./products/products.model'),
-  orders: require('./orders/orders.model')
-}
 
 // Initialize Express app
 const app = express()
@@ -28,7 +25,6 @@ const app = express()
 // Setup GraphQL endpoint middleware
 app.use('/graphql', graphqlHTTP({
  schema: schema,     // Attach schema
- rootValue: root,    // Attach resolver
  graphiql: true   // (Optional) Enable GraphiQL UI
 }))
 
