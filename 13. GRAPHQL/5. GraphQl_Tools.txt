@@ -1,0 +1,54 @@
+## 📘 GraphQL Tools – Summary
+
+### 🔹 Why It’s Needed
+
+* As projects grow, **GraphQL schemas and resolvers** become too big to manage in one file.
+* We need a way to:
+
+  * Split schemas into multiple files (by feature).
+  * Organize code by **functionality** instead of keeping everything in one place.
+  * Manage **complex business logic** cleanly.
+
+---
+
+### 🔹 What Is GraphQL Tools?
+
+* **A set of utilities** made by the Apollo team.
+* Helps you easily:
+
+  1. Split schemas into multiple `.graphql` files.
+  2. Merge them back into one executable schema.
+  3. Keep resolvers separate from schema definitions.
+  4. Organize your GraphQL server into **modular, maintainable parts**.
+
+---
+
+### 🔹 Connection to Apollo
+
+* GraphQL Tools is used **inside Apollo Server**, but it’s **standalone**.
+* You can use it even if you’re working with plain `express-graphql`.
+* It’s **open source** and widely used (by companies like Microsoft and PayPal).
+
+---
+
+### 🔹 Benefits
+
+✅ Cleaner folder structure (schemas, resolvers, models separated)
+✅ Easier to maintain and scale
+✅ Proven, production-ready
+✅ Compatible with both **Apollo Server** and **express-graphql**
+
+---
+
+### ⚠️ Note on Apollo Services
+
+* Apollo offers paid GraphQL cloud services.
+* Most of Apollo’s core libraries are free and open source.
+* You can use GraphQL Tools without relying on Apollo’s paid products.
+
+---
+
+### 💡 Key Takeaway
+
+> **GraphQL Tools** helps you split, organize, and merge schemas and resolvers — bringing professional structure to large GraphQL projects, whether you use Express or Apollo.
+
