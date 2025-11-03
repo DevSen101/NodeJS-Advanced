@@ -1,0 +1,62 @@
+## 🔷 What Is Apollo?
+
+Apollo is a **GraphQL platform** — a full ecosystem of tools to build, query, and manage GraphQL APIs.
+It provides both **client** and **server** libraries that go beyond the basic `express-graphql` setup.
+
+---
+
+### ⚙️ Apollo Client
+
+* Used on the **frontend** (React, Angular, iOS, Android).
+* Makes GraphQL queries directly to your backend.
+* Handles:
+
+  * Caching of query results
+  * Loading and error states
+  * Auto data synchronization with the server
+  * Reactive updates in components
+* It replaces manually making `POST` requests to `/graphql`.
+
+✅ **Main Benefit:** It automatically connects your frontend UI with your GraphQL data.
+
+---
+
+### 🖥️ Apollo Server
+
+* A **backend library** to build a GraphQL API in Node.js.
+* Works similarly to `express-graphql` but includes extra features:
+
+  * Middleware support for Express, Koa, Fastify, etc.
+  * Integration with **serverless** platforms (AWS Lambda, Google Cloud Functions).
+  * Built-in support for **subscriptions** (real-time updates via WebSocket).
+* It can replace `express-graphql` directly, or integrate into an existing Express app.
+
+---
+
+### 🧩 GraphQL Operations Recap
+
+1. **Query** → Read data
+2. **Mutation** → Write/update data
+3. **Subscription** → Real-time updates (e.g., push notifications)
+
+Apollo makes all three easier to implement.
+
+---
+
+### 🚀 Extra Features
+
+* “Batteries included” packages for full setup (`apollo-server`).
+* Specialized versions like:
+
+  * `apollo-server-express`
+  * `apollo-server-lambda`
+  * `apollo-server-fastify`
+* Well-documented official site with full guides.
+
+---
+
+### 💡 Key Takeaway
+
+> Apollo is a **feature-rich GraphQL framework** that simplifies both client and server development.
+> For the backend, it’s like `express-graphql` but with more power — including caching, subscriptions, and integrations for modern deployments.
+
