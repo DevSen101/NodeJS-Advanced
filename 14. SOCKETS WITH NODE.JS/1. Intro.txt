@@ -1,0 +1,77 @@
+### 🔹 Topic: Introduction to **Sockets**
+
+* Sockets are **fundamental to the internet**.
+* Used in apps like **Discord** or **WhatsApp** for real-time communication.
+* With normal HTTP:
+
+  * **POST** → send a message.
+  * **GET** → fetch messages.
+* Problem:
+
+  * How do we know **when** to fetch new messages?
+  * People can reply **anytime** — seconds, hours, or days later.
+* Regular requests can’t handle **real-time updates** efficiently.
+* This is where **Sockets** come in — they enable **continuous, two-way communication** between client and server.
+* Before learning sockets, we explore **how traditional HTTP** would handle this and its limitations.
+
+This transcript explains **polling** — one of the simplest ways to keep client data up to date with the server — and why it’s often replaced by **web sockets** for real-time applications.
+
+Here’s a **summary with key points**:
+
+---
+
+### 🧠 Concept: Polling
+
+* **Definition:** The client repeatedly sends `GET` requests to the server at fixed time intervals to check for new data.
+* **Example use case:** Chat applications where new messages can arrive at any time.
+
+---
+
+### 💻 Implementation Example (Client Side)
+
+```js
+const pollingRate = 500; // 500 milliseconds
+
+setInterval(() => {
+  fetch('https://api.mychatapp.com/messages') // imaginary endpoint
+    .then(response => response.json())
+    .then(data => {
+      // Update messages in UI
+      console.log(data);
+    });
+}, pollingRate);
+```
+
+* This makes a request every 500 ms.
+* Each request fetches new messages.
+* The new data is then displayed in the app.
+
+---
+
+### ⚠️ Problems with Polling
+
+1. **Choosing the right interval:**
+
+   * Too short → high server load.
+   * Too long → poor real-time experience.
+
+2. **Latency:**
+
+   * A 500 ms delay means users always see data that’s up to half a second old.
+
+3. **Scalability:**
+
+   * 120 requests per minute per user (2 requests/sec).
+   * Many users → large server cost and bandwidth usage.
+
+4. **Not suitable for real-time critical apps:**
+
+   * Examples: self-driving cars, stock trading, or multiplayer games (like Pong).
+   * Even a small delay can cause major problems.
+
+---
+
+### 🚀 Transition
+
+* Polling works but is inefficient for real-time updates.
+* The lecture ends by hinting at the better solution: **Sockets (WebSockets)**, which allow **continuous, two-way communication** between client and server without constant HTTP requests.
