@@ -1,0 +1,90 @@
+
+### **Socket.IO – Namespaces (Summary Notes)**
+
+**1. What are Namespaces?**
+
+* A *namespace* is a communication channel within Socket.IO.
+* It allows splitting the logic of an app over a **single shared connection**.
+* Used to separate different tasks, permission levels, or applications.
+
+---
+
+**2. Why use Namespaces?**
+
+* To separate different areas of a socket server:
+
+  * Example: `/admin` for admin-only actions, `/users` for regular users.
+  * Example: `/pong`, `/tetris`, `/chat` for different game modules.
+* Helps organize code and isolate event handling for different use cases.
+
+---
+
+**3. Default Namespace**
+
+* If no namespace is defined, Socket.IO uses the **default namespace** `/`.
+* Clients connect to it automatically when no namespace is specified.
+
+Example (client side):
+
+```js
+const socket = io('/'); // connects to default namespace
+```
+
+---
+
+**4. Creating Custom Namespaces**
+
+**Server side:**
+
+```js
+const { Server } = require('socket.io');
+const io = new Server(server);
+
+// Create a namespace for Pong
+const pongNamespace = io.of('/pong');
+
+pongNamespace.on('connection', (socket) => {
+  console.log('User connected to Pong namespace');
+  socket.emit('ready', 'Player ready');
+});
+```
+
+**Client side:**
+
+```js
+const socket = io('/pong');
+```
+
+---
+
+**5. How Namespaces Work**
+
+* Each namespace can have its own event handlers.
+* The same physical connection is shared between namespaces.
+* Keeps separation of logic but avoids multiple TCP connections.
+
+---
+
+**6. Benefits**
+
+* Organizes large-scale systems (multiple apps in one server).
+* Allows different permission levels.
+* Reduces network load by sharing a single WebSocket connection.
+
+---
+
+**7. Example**
+
+* `/pong` → handles Pong game events.
+* `/tetris` → handles Tetris game events.
+* `/chat` → handles chat or lobby communications.
+
+Socket.IO smartly manages one shared connection between all of them.
+
+---
+
+**Next Concept → Rooms**
+
+* Namespaces separate logic at the *application level*.
+* Rooms separate users *within* a namespace (covered next).
+

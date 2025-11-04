@@ -1,0 +1,112 @@
+# **Socket.IO – Rooms (Summary Notes)**
+
+### **1. What are Rooms?**
+
+* **Rooms** are logical groupings of sockets **within a namespace**.
+* They allow sending messages to specific subsets of clients instead of broadcasting to everyone.
+* A client can **join** or **leave** multiple rooms dynamically.
+
+---
+
+### **2. Purpose of Rooms**
+
+* To separate users or sessions under the same namespace.
+* To handle features like:
+
+  * Private or group chats
+  * Game rooms
+  * User-specific notifications
+  * Temporary channels for collaboration
+
+---
+
+### **3. Key Characteristics**
+
+* Each socket automatically joins its own private room (using its socket ID).
+* Rooms exist only while at least one socket is inside.
+* Rooms are not visible to clients directly — managed on the **server** side.
+* Work only **within a namespace** (they don’t cross namespaces).
+
+---
+
+### **4. Basic Server Syntax**
+
+```js
+io.on('connection', (socket) => {
+  console.log('A user connected');
+
+  // Join a room
+  socket.join('room1');
+  console.log('User joined room1');
+
+  // Send message only to room1
+  io.to('room1').emit('message', 'Hello room1 users');
+
+  // Leave a room
+  socket.leave('room1');
+});
+```
+
+---
+
+### **5. Sending Messages**
+
+* **Emit to a specific room:**
+
+  ```js
+  io.to('roomName').emit('eventName', data);
+  ```
+* **Emit to all except sender (inside a room):**
+
+  ```js
+  socket.to('roomName').emit('eventName', data);
+  ```
+* **Emit only to the sender:**
+
+  ```js
+  socket.emit('eventName', data);
+  ```
+
+---
+
+### **6. Example: Chat Application**
+
+```js
+io.on('connection', (socket) => {
+  socket.on('joinRoom', (room) => {
+    socket.join(room);
+    socket.to(room).emit('message', `${socket.id} joined ${room}`);
+  });
+
+  socket.on('chatMessage', (data) => {
+    io.to(data.room).emit('message', data.message);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('User disconnected');
+  });
+});
+```
+
+Each room acts as an isolated chat channel — users in one room don’t see messages from another.
+
+---
+
+### **7. Difference Between Namespaces and Rooms**
+
+| Feature    | **Namespaces**                           | **Rooms**                          |
+| ---------- | ---------------------------------------- | ---------------------------------- |
+| Purpose    | Split the app into different modules     | Group clients within one namespace |
+| Scope      | Global (each has its own event handlers) | Local to a namespace               |
+| Example    | `/chat`, `/game`, `/admin`               | `room1`, `room2`, `user_123`       |
+| Connection | Clients connect separately               | Clients join dynamically           |
+| Use Case   | Multiple applications                    | Private/group communication        |
+
+---
+
+### **8. Summary**
+
+* **Namespaces** = separate app areas (like chat, game, admin).
+* **Rooms** = groups inside those areas.
+* Use rooms for **targeted communication** and **scalability**.
+* They make Socket.IO flexible for multi-user, real-time systems.
