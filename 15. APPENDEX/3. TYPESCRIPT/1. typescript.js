@@ -68,4 +68,6 @@ class Animal {
 }
 let lion = new Animal(`RAAAWWWR`);
 lion.sing;
+// Umion
+let confused = true;
 //# sourceMappingURL=1.%20typescript.js.map

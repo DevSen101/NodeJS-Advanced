@@ -95,3 +95,6 @@ class Animal{
 
 let lion = new Animal(`RAAAWWWR`)
 lion.sing
+
+// Umion
+let confused: string | number | boolean = true
