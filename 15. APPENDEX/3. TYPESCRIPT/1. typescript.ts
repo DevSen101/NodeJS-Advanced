@@ -28,5 +28,19 @@ let basket: [string, number]
 basket = ['basketball', 5]  //sequence sensetive
 
 // Enum
-enum Size { Small = 1, Medium = 2, Large: 3}
+enum Size { Small = 1, Medium = 2, Large= 3}
 let sizeName: number = Size.Small
+
+// Any - (be carefull)
+let whatever: any = 'ohhhhhhh noooooooo!!!'
+whatever = basket
+
+// void
+let sing = (): void => {
+ console.log('lalalalalala');
+}
+
+// never
+let error = (): never => {
+ throw Error('ooops')
+}

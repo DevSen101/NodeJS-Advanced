@@ -1,21 +1,40 @@
-"use strict";
 //Types in TypeScript
-Object.defineProperty(exports, "__esModule", { value: true });
 // boolean
-let isCool = true;
+var isCool = true;
 // number
-let age = 22;
+var age = 22;
 // String
-let eyeColor = 'Black';
-let mySelf = `I'm Dev, ${age} year old`;
+var eyeColor = 'Black';
+var mySelf = "I'm Dev, ".concat(age, " year old");
 // Array
-let pets = ['cat', 'dog', 'horse'];
-let pets2 = ['lion', 'dragon', 'lizard'];
+var pets = ['cat', 'dog', 'horse'];
+var pets2 = ['lion', 'dragon', 'lizard'];
 // Object
-let wizard = {
+var wizard = {
     a: 'john'
 };
 // null and undefined
-let meh = undefined;
-let noo = null;
-//# sourceMappingURL=1.%20typescript.js.map
+var meh = undefined;
+var noo = null;
+// Tuple
+var basket;
+basket = ['basketball', 5]; //sequence sensetive
+// Enum
+var Size;
+(function (Size) {
+    Size[Size["Small"] = 1] = "Small";
+    Size[Size["Medium"] = 2] = "Medium";
+    Size[Size["Large"] = 3] = "Large";
+})(Size || (Size = {}));
+var sizeName = Size.Small;
+// Any - (be carefull)
+var whatever = 'ohhhhhhh noooooooo!!!';
+whatever = basket;
+// void
+var sing = function () {
+    console.log('lalalalalala');
+};
+// never
+var error = function () {
+    throw Error('ooops');
+};
