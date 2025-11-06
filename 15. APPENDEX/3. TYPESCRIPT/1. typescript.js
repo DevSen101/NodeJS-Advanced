@@ -1,23 +1,25 @@
+"use strict";
 //Types in TypeScript
+Object.defineProperty(exports, "__esModule", { value: true });
 // boolean
-var isCool = true;
+let isCool = true;
 // number
-var age = 22;
+let age = 22;
 // String
-var eyeColor = 'Black';
-var mySelf = "I'm Dev, ".concat(age, " year old");
+let eyeColor = 'Black';
+let mySelf = `I'm Dev, ${age} year old`;
 // Array
-var pets = ['cat', 'dog', 'horse'];
-var pets2 = ['lion', 'dragon', 'lizard'];
+let pets = ['cat', 'dog', 'horse'];
+let pets2 = ['lion', 'dragon', 'lizard'];
 // Object
-var wizard = {
+let wizard = {
     a: 'john'
 };
 // null and undefined
-var meh = undefined;
-var noo = null;
+let meh = undefined;
+let noo = null;
 // Tuple
-var basket;
+let basket;
 basket = ['basketball', 5]; //sequence sensetive
 // Enum
 var Size;
@@ -26,15 +28,22 @@ var Size;
     Size[Size["Medium"] = 2] = "Medium";
     Size[Size["Large"] = 3] = "Large";
 })(Size || (Size = {}));
-var sizeName = Size.Small;
+let sizeName = Size.Small;
 // Any - (be carefull)
-var whatever = 'ohhhhhhh noooooooo!!!';
+let whatever = 'ohhhhhhh noooooooo!!!';
 whatever = basket;
 // void
-var sing = function () {
+let sing = () => {
     console.log('lalalalalala');
 };
 // never
-var error = function () {
+let error = () => {
     throw Error('ooops');
 };
+let fightRobotArmy = (robots) => {
+    console.log('Fight!');
+};
+let fightRobotArmy2 = (robots) => {
+    console.log('Fight!');
+};
+//# sourceMappingURL=1.%20typescript.js.map

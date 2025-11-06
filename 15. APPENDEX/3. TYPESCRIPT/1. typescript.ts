@@ -44,3 +44,18 @@ let sing = (): void => {
 let error = (): never => {
  throw Error('ooops')
 }
+
+// interface
+interface RobotArmy {
+ count: number,
+ type: string,
+ magic: string
+}
+
+let fightRobotArmy = (robots: RobotArmy) => {
+ console.log('Fight!');
+}
+
+let fightRobotArmy2 = (robots: {count: number, type: string, magic: string}) => {
+ console.log('Fight!');
+}
