@@ -1,6 +1,24 @@
-function sum(a: number,b: number){
- return a + b
+//Types in TypeScript
+
+// boolean
+let isCool: boolean = true
+
+// number
+let age: number = 22
+
+// String
+let eyeColor: string = 'Black'
+let mySelf: string = `I'm Dev, ${age} year old`
+
+// Array
+let pets: string[] = ['cat', 'dog', 'horse']
+let pets2: Array<string> = ['lion', 'dragon', 'lizard']
+
+// Object
+let wizard: object = {
+ a: 'john'
 }
 
-const answer: number = sum('hii',2)
-console.log(answe);
+// null and undefined
+let meh: undefined = undefined
+let noo: null = null
