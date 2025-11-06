@@ -2,5 +2,5 @@ function sum(a: number,b: number){
  return a + b
 }
 
-const answer: number = sum(4,5)
-console.log(answer);
+const answer: number = sum('hii',2)
+console.log(answe);

@@ -1,5 +1,8 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 function sum(a, b) {
     return a + b;
 }
-var answer = sum(4, 5);
-console.log(answer);
+const answer = sum('hii', 2);
+console.log(answe);
+//# sourceMappingURL=1.%20typescript.js.map
