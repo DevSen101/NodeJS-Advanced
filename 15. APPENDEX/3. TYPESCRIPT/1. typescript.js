@@ -46,4 +46,26 @@ let fightRobotArmy = (robots) => {
 let fightRobotArmy2 = (robots) => {
     console.log('Fight!');
 };
+let dog = {};
+dog.count;
+// Function
+let fightRobotArmy3 = (robots) => {
+    console.log('Fight!');
+};
+let fightRobotArmy4 = (robots) => {
+    console.log('Fight!');
+    return 5;
+};
+// classes
+class Animal {
+    sing = 'allalallaal';
+    constructor(sound) {
+        this.sing = sound;
+    }
+    greet() {
+        return `Hello ${this.sing}`;
+    }
+}
+let lion = new Animal(`RAAAWWWR`);
+lion.sing;
 //# sourceMappingURL=1.%20typescript.js.map
